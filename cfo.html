@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<head>
+    <script src = 'https://unpkg.com/jspsych@7.3.3'></script>  <!--This loads the jsPsych package-->
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script> <!--This loads in the plugin that shows text on the screen-->
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script> <!--This loads in the plugin that shows images and then records a response-->
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script> <!--This loads in the plugin that preloads your images for your participant-->
+    <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.1.1/css/survey.css">
+    <link rel="stylesheet" type="text/css" href="styles/site.css" />
+</head>
+</html>
+
+<script>
+var jsPsych = initJsPsych({
+      on_finish: function(){
+        jsPsych.data.displayData();
+      }
+    });
+
+
+fee = 3
+var timeline = [];
+
+var consent = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus:
+  //<div style="text-align: left;"><span style="font-size:22px;">
+    `<u><h1>Consent Form</h1></u>
+     <br>
+     This survey should take about 25 minutes. You will be compensated with a flat rate of $${fee} for participation.
+     <br>
+    The purpose of this study is to help us understand how people make everyday judgments. Please read carefully and answer the questions thoughtfully.
+    <br>
+    Participating is completely voluntary - if you wish to stop participating at any time, simply close your browser window. 
+    At the end of the survey you will be provided with a randomly generated personalized password.
+    <br>
+    Of course, your responses are and will remain anonymous at all times, and none of the information you provide will make it possible to identify you.
+    <br><br>
+    If you have any questions regarding the study, you may contact Dr. Amy Krosch at amy.krosch@cornell.edu. 
+    If you have any questions or concerns regarding your rights as a subject in this study, 
+    you may contact the Institutional Review Board (IRB) at 607/255.5138 or access their website at http://www.irb.cornell.edu. 
+    You may also report your concerns or complaints anonymously through Ethicspoint or by calling toll free at 866/293.3077. 
+    Ethicspoint is an independent organization that serves as a liaison between the University and the person bringing the complaint so that anonymity can be ensured.
+    <br><br>
+    If you consent to take part in this survey, please <b>press the space bar to advance.</b>
+   `
+    //</div>
+        ,
+  choices: " "
+}
+ 
+
+
+
+timeline.push(consent);
+
+jsPsych.run(timeline);
+
+
+</script>
