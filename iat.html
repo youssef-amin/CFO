@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<head>
+    <script src = 'https://unpkg.com/jspsych@7.3.3'></script>  <!--This loads the jsPsych package-->
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script> <!--This loads in the plugin that shows text on the screen-->
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script> <!--This loads in the plugin that shows images and then records a response-->
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script> <!--This loads in the plugin that preloads your images for your participant-->
+    <script src="https://unpkg.com/@jspsych/plugin-iat-image@1.1.2"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.1.1/css/survey.css">
+</head>
+</html>
+
+<script>
+var jsPsych = initJsPsych({
+      on_finish: function(){
+        jsPsych.data.displayData();
+      }
+    });
+
+var timeline = [];
+
+var iat_compat_right = {
+  type: jsPsychIatImage,
+  stimulus: 'images/CFD_237_052.png',
+  stim_key_association: 'right',
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['OLD','GOOD'],
+  right_category_label: ['YOUNG','BAD'],
+  response_ends_trial: true
+};
+
+
+timeline.push(iat_compat_right);
+
+jsPsych.run(timeline);
+
+
+</script>
