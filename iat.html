@@ -24,7 +24,11 @@ var iat_compat_right = {
   stimulus: 'images/CFD_237_052.png',
   stim_key_association: 'right',
   html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
-  bottom_instructions: 
+  bottom_instructions: '<p>Instructions: Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
+  '<p>In the task, words and/or images appear in the middle of the screen. </p>' +
+  '<p>When the word/image belongs to the category on the left, press the E key as fast as you can.' +
+  ' When it belongs to the category on the right, press the I key as fast as you can.</p>' +
+  '<p>If you make an error, a red X will appear. Correct errors by hitting the other key. Please try to go as fast as you can while making as few errors as possible.</p>',
   force_correct_key_press: true,
   display_feedback: true,
   trial_duration: 3000, //Only if display_feedback is false
@@ -34,6 +38,11 @@ var iat_compat_right = {
   right_category_label: ['YOUNG','BAD'],
   response_ends_trial: true
 };
+ 
+
+
+
+
 
 
 timeline.push(iat_compat_right);
