@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script> <!--This loads in the plugin that preloads your images for your participant-->
     <script src="https://unpkg.com/@jspsych/plugin-iat-image@1.1.2"></script>
     <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.1.1/css/survey.css">
+    <link rel="stylesheet" type="text/css" href="styles/site.css" />
 </head>
 </html>
 
@@ -19,33 +20,37 @@ var jsPsych = initJsPsych({
 
 var timeline = [];
 
-var iat_compat_right = {
-  type: jsPsychIatImage,
-  stimulus: 'images/CFD_237_052.png',
-  stim_key_association: 'right',
-  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
-  bottom_instructions: '<p>Instructions: Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
+var iat_instructions = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus:'<h1>Instructions:</h1> <p> Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
   '<p>In the task, words and/or images appear in the middle of the screen. </p>' +
   '<p>When the word/image belongs to the category on the left, press the E key as fast as you can.' +
   ' When it belongs to the category on the right, press the I key as fast as you can.</p>' +
-  '<p>If you make an error, a red X will appear. Correct errors by hitting the other key. Please try to go as fast as you can while making as few errors as possible.</p>',
+  '<p>If you make an error, a red X will appear. Correct errors by hitting the other key. Please try to go as fast as you can while making as few errors as possible.</p>' +
+  '<p>When you are ready, press [Space] to begin</p>',
+  choices: " "
+}
+
+var iat_compat_right = {
+  type: jsPsychIatImage,
+  stimulus: "img/IAT_img/B0jpg.jpg",
+  stim_key_association: 'right',
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
   force_correct_key_press: true,
   display_feedback: true,
   trial_duration: 3000, //Only if display_feedback is false
   left_category_key: 'e',
   right_category_key: 'i',
-  left_category_label: ['OLD','GOOD'],
-  right_category_label: ['YOUNG','BAD'],
+  left_category_label: ['Black'],
+  right_category_label: ['White'],
   response_ends_trial: true
 };
  
 
 
 
-
-
-
-timeline.push(iat_compat_right);
+timeline.push(iat_instructions, iat_compat_right);
 
 jsPsych.run(timeline);
 
