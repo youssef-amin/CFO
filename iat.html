@@ -31,18 +31,12 @@ var iat_instructions = {
   choices: " "
 };
 
-const iat_imgs = [];
 
-(function(){
-  for (let i = 0; i < 10; i++) {
-  iat_images.push('img/IAT_img/' + 'B' + i + 'jpg.jpg');
-}
-});
-
-var iat_compat_right = {
+var iat_compat_right_procedure = {
+  timeline :[ 
+  {
   type: jsPsychIatImage,
-  stimulus: iat_imgs[0],
-
+  stimulus: jsPsych.timelineVariable('face'),
   stim_key_association: 'right',
   html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
   bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
@@ -54,12 +48,37 @@ var iat_compat_right = {
   left_category_label: ['Black'],
   right_category_label: ['White'],
   response_ends_trial: true
-};
- 
+  }],
+  timeline_variables: [
+  {face: 'img/IAT_img/B0jpg.jpg'},
+  {face:'img/IAT_img/B1jpg.jpg'},
+  {face:'img/IAT_img/B2jpg.jpg'},
+  {face:'img/IAT_img/B3jpg.jpg'},
+  {face:'img/IAT_img/B4jpg.jpg'},
+  {face:'img/IAT_img/B5jpg.jpg'},
+  {face:'img/IAT_img/B6jpg.jpg'},
+  {face:'img/IAT_img/B7jpg.jpg'},
+  {face:'img/IAT_img/B8jpg.jpg'},
+  {face:'img/IAT_img/B9jpg.jpg'},
+  {face:'img/IAT_img/W0jpg.jpg'},
+  {face:'img/IAT_img/W1jpg.jpg'},
+  {face:'img/IAT_img/W2jpg.jpg'},
+  {face:'img/IAT_img/W3jpg.jpg'},
+  {face:'img/IAT_img/W4jpg.jpg'},
+  {face:'img/IAT_img/W5jpg.jpg'},
+  {face:'img/IAT_img/W6jpg.jpg'},
+  {face:'img/IAT_img/W7jpg.jpg'},
+  {face:'img/IAT_img/W8jpg.jpg'},
+  {face:'img/IAT_img/W9jpg.jpg'}
+  ],
+  randomize_order: true,
 
+}
 
+// random index in stimulus, then repeat 20 times. if stimulus index is the same 
+// as other trial, then rechoose random index and rerun 
 
-timeline.push(iat_instructions, iat_compat_right);
+timeline.push(iat_instructions, iat_compat_right_procedure);
 
 jsPsych.run(timeline);
 
