@@ -7,7 +7,6 @@
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script> <!--This loads in the plugin that preloads your images for your participant-->
     <script src="https://unpkg.com/@jspsych/plugin-iat-image@1.1.2"></script>
     <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.1.1/css/survey.css">
-    <link rel="stylesheet" type="text/css" href="styles/site.css" />
 </head>
 </html>
 
@@ -37,7 +36,12 @@ var iat_compat_right_procedure = {
   {
   type: jsPsychIatImage,
   stimulus: jsPsych.timelineVariable('face'),
-  stim_key_association: 'right',
+  stim_key_association: function(){
+    if (jsPsych.timelineVariable('face').indexOf('B') > -1){
+      return 'left';
+    } else
+    return 'right';
+    },
   html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
   bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
   force_correct_key_press: true,
