@@ -6,6 +6,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script> <!--This loads in the plugin that shows images and then records a response-->
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script> <!--This loads in the plugin that preloads your images for your participant-->
     <script src="https://unpkg.com/@jspsych/plugin-iat-image@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-iat-html@1.1.2"></script>
     <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.1.1/css/survey.css">
     <link href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css" rel="stylesheet" type="text/css" />
 </head>
@@ -43,6 +44,40 @@ var iat_imgs = [
   {face:'img/IAT_img/W9jpg.jpg'}
   ]
 
+var iat_words = [
+  {gword: 'Fabulous', bword: 'Awful'},
+  {gword: 'Fantastic', bword: 'Disgusting'},
+  {gword: 'Great', bword: 'Foul'},
+  {gword: 'Lovely', bword: 'Horrible'},
+  {gword: 'Nice', bword: 'Horrid'},
+  {gword: 'Superb', bword: 'Nasty'},
+  {gword: 'Terrific', bword: 'Revolting'},
+  {gword: 'Wonderful', bword: 'Terrible'}
+]
+
+var iat_combined = [
+  {face: 'img/IAT_img/B0jpg.jpg', gword: 'Fabulous', bword: 'Awful'},
+  {face:'img/IAT_img/B1jpg.jpg', gword: 'Fantastic', bword: 'Disgusting' },
+  {face:'img/IAT_img/B2jpg.jpg', gword: 'Great', bword: 'Foul'},
+  {face:'img/IAT_img/B3jpg.jpg', gword: 'Lovely', bword: 'Horrible'},
+  {face:'img/IAT_img/B4jpg.jpg', gword: 'Nice', bword: 'Horrid' },
+  {face:'img/IAT_img/B5jpg.jpg', gword: 'Superb', bword: 'Nasty'},
+  {face:'img/IAT_img/B6jpg.jpg', gword: 'Terrific', bword: 'Revolting'},
+  {face:'img/IAT_img/B7jpg.jpg', gword: 'Wonderful', bword: 'Terrible'},
+  {face:'img/IAT_img/B8jpg.jpg'},
+  {face:'img/IAT_img/B9jpg.jpg'},
+  {face:'img/IAT_img/W0jpg.jpg'},
+  {face:'img/IAT_img/W1jpg.jpg'},
+  {face:'img/IAT_img/W2jpg.jpg'},
+  {face:'img/IAT_img/W3jpg.jpg'},
+  {face:'img/IAT_img/W4jpg.jpg'},
+  {face:'img/IAT_img/W5jpg.jpg'},
+  {face:'img/IAT_img/W6jpg.jpg'},
+  {face:'img/IAT_img/W7jpg.jpg'},
+  {face:'img/IAT_img/W8jpg.jpg'},
+  {face:'img/IAT_img/W9jpg.jpg'}
+]
+
 var iat_instructions = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:'<h1>Instructions:</h1> <p> Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
@@ -53,6 +88,7 @@ var iat_instructions = {
   choices: " "
 };
 
+// black (left) and white (right)
 var compat_right_1 = {
   type: jsPsychIatImage,
   stimulus: jsPsych.timelineVariable('face'),
@@ -69,11 +105,12 @@ var compat_right_1 = {
   trial_duration: 3000, //Only if display_feedback is false
   left_category_key: 'e',
   right_category_key: 'i',
-  left_category_label: ['Black'],
-  right_category_label: ['White'],
+  left_category_label: ['Black Americans'],
+  right_category_label: ['White Americans'],
   response_ends_trial: true
 }
 
+//instructions for category change to unpleasant(left) and pleasant(right)
 var instr_1 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:'<p> Now the categories have changed, but the rules remain the same. </p>' +
@@ -82,7 +119,62 @@ var instr_1 = {
   choices: " "
 }
 
+// unpleasant(left) and pleasant (right)
 var compat_right_2 = {
+  timeline: [
+  {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    var stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('gword') + '</span>';
+    return stim
+  },
+  stim_key_association: 'right',
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Unpleasant'],
+  right_category_label: ['Pleasant'],
+  response_ends_trial: true
+  },
+
+  {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    var stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('bword') + '</span>';
+    return stim
+  } ,
+  stim_key_association: 'left',
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Unpleasant'],
+  right_category_label: ['Pleasant'],
+  response_ends_trial: true
+  }],
+  timeline_variables: iat_words,
+  randomize_order: true
+}
+
+//instructions for combined category change(black+unpleasant(left) and white+pleasant (right))
+var instr_2 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus:'<p> Now the four categories you saw separately will appear together. Remember, each word/image fits in only one of the four categories. The label/item colors may help you identify the appropriate category. </p>' +
+  '<p> Use the E key for the two categories on the left and the I key for the two categories on the right. </p>' +
+  '<p> Again, try to go as fast as possible without making mistakes. Correct errors by hitting the other key. Practice this combination now. </p>' +
+  '<p> When you are ready, press [Space] to begin </p>',
+  choices: " "
+}
+
+//combined black+unpleasant(left) and white+pleasant (right)
+var compat_right_3 = {
   type: jsPsychIatImage,
   stimulus: jsPsych.timelineVariable('face'),
   stim_key_association: function(){
@@ -98,8 +190,8 @@ var compat_right_2 = {
   trial_duration: 3000, //Only if display_feedback is false
   left_category_key: 'e',
   right_category_key: 'i',
-  left_category_label: ['Unpleasant'],
-  right_category_label: ['Pleasant'],
+  left_category_label: ['Black Americans or Unpleasant'],
+  right_category_label: ['White Americans or Pleasant'],
   response_ends_trial: true
 }
 
@@ -109,13 +201,7 @@ var compat_right_block1 = {
   randomize_order: true,
 }
 
-var compat_right_block2 = {
-  timeline: [compat_right_2],
-  timeline_variables: iat_imgs,
-  randomize_order: true,
-}
-
-timeline.push(iat_instructions, compat_right_block1, instr_1, compat_right_block2);
+timeline.push(iat_instructions, compat_right_block1, instr_1, compat_right_2, instr_2);
 
 jsPsych.run(timeline);
 
