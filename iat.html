@@ -20,41 +20,7 @@ var jsPsych = initJsPsych({
 
 var timeline = [];
 
-var iat_instructions = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus:'<h1>Instructions:</h1> <p class = iat_inst> Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
-  '<p class = iat_inst>In the task, words and/or images appear in the middle of the screen. </p>' +
-  '<p class = iat_inst>When the word/image belongs to the category on the left, press the E key as fast as you can.' +
-  ' When it belongs to the category on the right, press the I key as fast as you can.</p>' +
-  '<p class = iat_inst>If you make an error, a red X will appear. Correct errors by hitting the other key. Please try to go as fast as you can while making as few errors as possible.</p>' +
-  '<p class = iat_inst>When you are ready, press [Space] to begin</p>',
-  choices: " "
-};
-
-
-var iat_compat_right_procedure = {
-  timeline :[ 
-  {
-  type: jsPsychIatImage,
-  stimulus: jsPsych.timelineVariable('face'),
-  stim_key_association: function(){
-    if (jsPsych.timelineVariable('face').indexOf('B') > -1){
-      return 'left';
-    } else
-    return 'right';
-    },
-  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
-  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
-  force_correct_key_press: true,
-  display_feedback: true,
-  trial_duration: 3000, //Only if display_feedback is false
-  left_category_key: 'e',
-  right_category_key: 'i',
-  left_category_label: ['Black'],
-  right_category_label: ['White'],
-  response_ends_trial: true
-  }],
-  timeline_variables: [
+var iat_imgs = [
   {face: 'img/IAT_img/B0jpg.jpg'},
   {face:'img/IAT_img/B1jpg.jpg'},
   {face:'img/IAT_img/B2jpg.jpg'},
@@ -75,15 +41,81 @@ var iat_compat_right_procedure = {
   {face:'img/IAT_img/W7jpg.jpg'},
   {face:'img/IAT_img/W8jpg.jpg'},
   {face:'img/IAT_img/W9jpg.jpg'}
-  ],
-  randomize_order: true,
+  ]
 
+var iat_instructions = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus:'<h1>Instructions:</h1> <p> Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
+  '<p>In the task, words and/or images appear in the middle of the screen. </p>' +
+  '<p>When the word/image belongs to the category on the left, press the E key as fast as you can. When it belongs to the category on the right, press the I key as fast as you can. </p>' +
+  '<p>If you make an error, a red X will appear. Correct errors by hitting the other key. Please try to go as fast as you can while making as few errors as possible.</p>' +
+  '<p>When you are ready, press [Space] to begin</p>',
+  choices: " "
+};
+
+var compat_right_1 = {
+  type: jsPsychIatImage,
+  stimulus: jsPsych.timelineVariable('face'),
+  stim_key_association: function(){
+    if (jsPsych.timelineVariable('face').indexOf('B') > -1){
+      return 'left';
+    } else
+    return 'right';
+    },
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Black'],
+  right_category_label: ['White'],
+  response_ends_trial: true
 }
 
-// random index in stimulus, then repeat 20 times. if stimulus index is the same 
-// as other trial, then rechoose random index and rerun 
+var instr_1 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus:'<p> Now the categories have changed, but the rules remain the same. </p>' +
+  '<p> Please try to go as <em> as fast as you can </em> while making as few errors as possible. Correct errors by hitting the other key </p>' +
+  '<p> When you are ready, press [Space] to begin </p>',
+  choices: " "
+}
 
-timeline.push(iat_instructions, iat_compat_right_procedure);
+var compat_right_2 = {
+  type: jsPsychIatImage,
+  stimulus: jsPsych.timelineVariable('face'),
+  stim_key_association: function(){
+    if (jsPsych.timelineVariable('face').indexOf('B') > -1){
+      return 'left';
+    } else
+    return 'right';
+    },
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Unpleasant'],
+  right_category_label: ['Pleasant'],
+  response_ends_trial: true
+}
+
+var compat_right_block1 = {
+  timeline: [compat_right_1],
+  timeline_variables: iat_imgs,
+  randomize_order: true,
+}
+
+var compat_right_block2 = {
+  timeline: [compat_right_2],
+  timeline_variables: iat_imgs,
+  randomize_order: true,
+}
+
+timeline.push(iat_instructions, compat_right_block1, instr_1, compat_right_block2);
 
 jsPsych.run(timeline);
 
