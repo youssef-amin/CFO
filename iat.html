@@ -22,18 +22,27 @@ var timeline = [];
 
 var iat_instructions = {
   type: jsPsychHtmlKeyboardResponse,
-  stimulus:'<h1>Instructions:</h1> <p> Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
-  '<p>In the task, words and/or images appear in the middle of the screen. </p>' +
-  '<p>When the word/image belongs to the category on the left, press the E key as fast as you can.' +
+  stimulus:'<h1>Instructions:</h1> <p class = iat_inst> Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
+  '<p class = iat_inst>In the task, words and/or images appear in the middle of the screen. </p>' +
+  '<p class = iat_inst>When the word/image belongs to the category on the left, press the E key as fast as you can.' +
   ' When it belongs to the category on the right, press the I key as fast as you can.</p>' +
-  '<p>If you make an error, a red X will appear. Correct errors by hitting the other key. Please try to go as fast as you can while making as few errors as possible.</p>' +
-  '<p>When you are ready, press [Space] to begin</p>',
+  '<p class = iat_inst>If you make an error, a red X will appear. Correct errors by hitting the other key. Please try to go as fast as you can while making as few errors as possible.</p>' +
+  '<p class = iat_inst>When you are ready, press [Space] to begin</p>',
   choices: " "
+};
+
+const iat_imgs = [];
+
+(function(){
+  for (let i = 0; i < 10; i++) {
+  iat_images.push('img/IAT_img/' + 'B' + i + 'jpg.jpg');
 }
+});
 
 var iat_compat_right = {
   type: jsPsychIatImage,
-  stimulus: "img/IAT_img/B0jpg.jpg",
+  stimulus: iat_imgs[0],
+
   stim_key_association: 'right',
   html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
   bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
