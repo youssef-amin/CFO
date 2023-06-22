@@ -175,6 +175,8 @@ var instr_2 = {
 
 //combined black+unpleasant(left) and white+pleasant (right)
 var compat_right_3 = {
+  timeline: [
+  {
   type: jsPsychIatImage,
   stimulus: jsPsych.timelineVariable('face'),
   stim_key_association: function(){
@@ -193,7 +195,50 @@ var compat_right_3 = {
   left_category_label: ['Black Americans or Unpleasant'],
   right_category_label: ['White Americans or Pleasant'],
   response_ends_trial: true
+  },
+
+  {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    var stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('bword') + '</span>';
+      return stim
+    } ,
+  stim_key_association: 'left',
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Black Americans or Unpleasant'],
+  right_category_label: ['White Americans or Pleasant'],
+  response_ends_trial: true
+  },
+
+  {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    var stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('gword') + '</span>';
+      return stim
+  },
+  stim_key_association: 'right',
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Black Americans or Unpleasant'],
+  right_category_label: ['White Americans or Pleasant'],
+  response_ends_trial: true
+  }
+  ],
+  timeline_variables: iat_combined,
+  randomize_order:true
 }
+
 
 var compat_right_block1 = {
   timeline: [compat_right_1],
@@ -201,7 +246,13 @@ var compat_right_block1 = {
   randomize_order: true,
 }
 
-timeline.push(iat_instructions, compat_right_block1, instr_1, compat_right_2, instr_2);
+//note for later, code the first block for now but for when you have to do 4 different iat block choices
+//make the category labels (and maybe stim key assoc) variables so you can randomly go through and assign it according to 
+//whichever block is randomly chosen. can change the variable names compat_right etc later
+
+//still need to fix undefined in iat_combined for compat_right_3 
+
+timeline.push(iat_instructions,instr_2, compat_right_3, compat_right_block1, instr_1, compat_right_2, );
 
 jsPsych.run(timeline);
 
