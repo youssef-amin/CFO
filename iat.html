@@ -21,6 +21,7 @@ var jsPsych = initJsPsych({
 
 var timeline = [];
 
+
 var iat_imgs = [
   {face: 'img/IAT_img/B0jpg.jpg'},
   {face:'img/IAT_img/B1jpg.jpg'},
@@ -55,28 +56,28 @@ var iat_words = [
   {gword: 'Wonderful', bword: 'Terrible'}
 ]
 
-var iat_combined = [
-  {face: 'img/IAT_img/B0jpg.jpg', gword: 'Fabulous', bword: 'Awful'},
-  {face:'img/IAT_img/B1jpg.jpg', gword: 'Fantastic', bword: 'Disgusting' },
-  {face:'img/IAT_img/B2jpg.jpg', gword: 'Great', bword: 'Foul'},
-  {face:'img/IAT_img/B3jpg.jpg', gword: 'Lovely', bword: 'Horrible'},
-  {face:'img/IAT_img/B4jpg.jpg', gword: 'Nice', bword: 'Horrid' },
-  {face:'img/IAT_img/B5jpg.jpg', gword: 'Superb', bword: 'Nasty'},
-  {face:'img/IAT_img/B6jpg.jpg', gword: 'Terrific', bword: 'Revolting'},
-  {face:'img/IAT_img/B7jpg.jpg', gword: 'Wonderful', bword: 'Terrible'},
-  {face:'img/IAT_img/B8jpg.jpg'},
-  {face:'img/IAT_img/B9jpg.jpg'},
-  {face:'img/IAT_img/W0jpg.jpg'},
-  {face:'img/IAT_img/W1jpg.jpg'},
-  {face:'img/IAT_img/W2jpg.jpg'},
-  {face:'img/IAT_img/W3jpg.jpg'},
-  {face:'img/IAT_img/W4jpg.jpg'},
-  {face:'img/IAT_img/W5jpg.jpg'},
-  {face:'img/IAT_img/W6jpg.jpg'},
-  {face:'img/IAT_img/W7jpg.jpg'},
-  {face:'img/IAT_img/W8jpg.jpg'},
-  {face:'img/IAT_img/W9jpg.jpg'}
+var good_words = [ 
+{stimuli: 'Fabulous'},
+  {stimuli: 'Fantastic'},
+  {stimuli: 'Great'}, 
+  {stimuli: 'Lovely'},
+  {stimuli: 'Nice'}, 
+  {stimuli: 'Superb'},
+  {stimuli: 'Terrific'},
+  {stimuli: 'Wonderful'}, 
 ]
+
+var bad_words = [  
+{stimuli: 'Awful'},
+  {stimuli: 'Disgusting'},
+  {stimuli: 'Foul'},
+  {stimuli: 'Horrible'},
+  {stimuli: 'Horrid'},
+  {stimuli: 'Nasty'},
+  {stimuli: 'Revolting'},
+  {stimuli: 'Terrible'}
+]
+
 
 var iat_instructions = {
   type: jsPsychHtmlKeyboardResponse,
@@ -174,13 +175,13 @@ var instr_2 = {
 }
 
 //combined black+unpleasant(left) and white+pleasant (right)
-var compat_right_3 = {
+var compat_right_3_img = {
   timeline: [
   {
   type: jsPsychIatImage,
   stimulus: jsPsych.timelineVariable('face'),
   stim_key_association: function(){
-    if (jsPsych.timelineVariable('face').indexOf('B') > -1){
+    if (jsPsych.timelineVariable('stimuli').indexOf('/B') > -1){
       return 'left';
     } else
     return 'right';
@@ -195,14 +196,20 @@ var compat_right_3 = {
   left_category_label: ['Black Americans or Unpleasant'],
   right_category_label: ['White Americans or Pleasant'],
   response_ends_trial: true
-  },
+}],
+  timeline_variables:iat_imgs,
+  randomize_order: true
+}
 
+
+var compat_right_3_bad = {
+  timeline: [
   {
   type: jsPsychIatHtml,
   stimulus: function(){
-    var stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('bword') + '</span>';
-      return stim
-    } ,
+    var stim = '<span style="color: red; font-size: 40px">' + jsPsych.timelineVariable('stimuli') + '</span>';
+    return stim
+  },
   stim_key_association: 'left',
   html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
   bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
@@ -214,13 +221,18 @@ var compat_right_3 = {
   left_category_label: ['Black Americans or Unpleasant'],
   right_category_label: ['White Americans or Pleasant'],
   response_ends_trial: true
-  },
+}],
+  timeline_variables: bad_words,
+  randomize_order: true
+}
 
+var compat_right_3_good = {
+  timeline: [
   {
   type: jsPsychIatHtml,
   stimulus: function(){
-    var stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('gword') + '</span>';
-      return stim
+    var stim = '<span style="color: green; font-size: 40px">' + jsPsych.timelineVariable('stimuli') + '</span>';
+    return stim
   },
   stim_key_association: 'right',
   html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
@@ -233,12 +245,15 @@ var compat_right_3 = {
   left_category_label: ['Black Americans or Unpleasant'],
   right_category_label: ['White Americans or Pleasant'],
   response_ends_trial: true
-  }
-  ],
-  timeline_variables: iat_combined,
-  randomize_order:true
+}],
+  timeline_variables: good_words,
+  randomize_order: true
 }
 
+var compat_right_3 = 
+{
+  timeline: [compat_right_3_img, compat_right_3_good, compat_right_3_bad],
+}
 
 var compat_right_block1 = {
   timeline: [compat_right_1],
@@ -252,7 +267,12 @@ var compat_right_block1 = {
 
 //still need to fix undefined in iat_combined for compat_right_3 
 
-timeline.push(iat_instructions,instr_2, compat_right_3, compat_right_block1, instr_1, compat_right_2, );
+//set gword, face, bword to a another array. example gword: x and x is x = [blah]. 
+
+//make only one parameter all: x. have x be an array with every parameter and in the stimulus make a conditional 
+//similar to how you presented choice key presses for the img vs html element
+
+timeline.push(iat_instructions,compat_right_3, compat_right_block1, instr_1, compat_right_2, instr_2, );
 
 jsPsych.run(timeline);
 
