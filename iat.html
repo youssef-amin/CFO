@@ -56,27 +56,6 @@ var iat_words = [
   {gword: 'Wonderful', bword: 'Terrible'}
 ]
 
-var good_words = [ 
-{stimuli: 'Fabulous'},
-  {stimuli: 'Fantastic'},
-  {stimuli: 'Great'}, 
-  {stimuli: 'Lovely'},
-  {stimuli: 'Nice'}, 
-  {stimuli: 'Superb'},
-  {stimuli: 'Terrific'},
-  {stimuli: 'Wonderful'}, 
-]
-
-var bad_words = [  
-{stimuli: 'Awful'},
-  {stimuli: 'Disgusting'},
-  {stimuli: 'Foul'},
-  {stimuli: 'Horrible'},
-  {stimuli: 'Horrid'},
-  {stimuli: 'Nasty'},
-  {stimuli: 'Revolting'},
-  {stimuli: 'Terrible'}
-]
 
 
 var iat_instructions = {
@@ -176,12 +155,10 @@ var instr_2 = {
 
 //combined black+unpleasant(left) and white+pleasant (right)
 var compat_right_3_img = {
-  timeline: [
-  {
   type: jsPsychIatImage,
   stimulus: jsPsych.timelineVariable('face'),
   stim_key_association: function(){
-    if (jsPsych.timelineVariable('stimuli').indexOf('/B') > -1){
+    if (jsPsych.timelineVariable('face').indexOf('B') > -1){
       return 'left';
     } else
     return 'right';
@@ -196,42 +173,15 @@ var compat_right_3_img = {
   left_category_label: ['Black Americans or Unpleasant'],
   right_category_label: ['White Americans or Pleasant'],
   response_ends_trial: true
-}],
-  timeline_variables:iat_imgs,
-  randomize_order: true
 }
 
-
-var compat_right_3_bad = {
+//words combined black+unpleasant(left) and white+pleasant (right)
+var compat_right_3_word = {
   timeline: [
   {
   type: jsPsychIatHtml,
   stimulus: function(){
-    var stim = '<span style="color: red; font-size: 40px">' + jsPsych.timelineVariable('stimuli') + '</span>';
-    return stim
-  },
-  stim_key_association: 'left',
-  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
-  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
-  force_correct_key_press: true,
-  display_feedback: true,
-  trial_duration: 3000, //Only if display_feedback is false
-  left_category_key: 'e',
-  right_category_key: 'i',
-  left_category_label: ['Black Americans or Unpleasant'],
-  right_category_label: ['White Americans or Pleasant'],
-  response_ends_trial: true
-}],
-  timeline_variables: bad_words,
-  randomize_order: true
-}
-
-var compat_right_3_good = {
-  timeline: [
-  {
-  type: jsPsychIatHtml,
-  stimulus: function(){
-    var stim = '<span style="color: green; font-size: 40px">' + jsPsych.timelineVariable('stimuli') + '</span>';
+    var stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('gword') + '</span>';
     return stim
   },
   stim_key_association: 'right',
@@ -245,21 +195,50 @@ var compat_right_3_good = {
   left_category_label: ['Black Americans or Unpleasant'],
   right_category_label: ['White Americans or Pleasant'],
   response_ends_trial: true
-}],
-  timeline_variables: good_words,
+  },
+
+  {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    var stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('bword') + '</span>';
+    return stim
+  } ,
+  stim_key_association: 'left',
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Black Americans or Unpleasant'],
+  right_category_label: ['White Americans or Pleasant'],
+  response_ends_trial: true
+  }],
+  timeline_variables: iat_words,
   randomize_order: true
 }
 
-var compat_right_3 = 
-{
-  timeline: [compat_right_3_img, compat_right_3_good, compat_right_3_bad],
-}
+
 
 var compat_right_block1 = {
   timeline: [compat_right_1],
   timeline_variables: iat_imgs,
   randomize_order: true,
 }
+
+var compat_right_block2 = {
+  timeline: [compat_right_3_img],
+  timeline_variables: iat_imgs,
+  randomize_order: true,
+}
+
+var compat_right_block_combine = { 
+  timeline: [compat_right_block2, compat_right_3_word],
+  randomize_order: true
+  
+}
+
 
 //note for later, code the first block for now but for when you have to do 4 different iat block choices
 //make the category labels (and maybe stim key assoc) variables so you can randomly go through and assign it according to 
@@ -272,7 +251,7 @@ var compat_right_block1 = {
 //make only one parameter all: x. have x be an array with every parameter and in the stimulus make a conditional 
 //similar to how you presented choice key presses for the img vs html element
 
-timeline.push(iat_instructions,compat_right_3, compat_right_block1, instr_1, compat_right_2, instr_2, );
+timeline.push(iat_instructions,compat_right_block_combine, compat_right_3_word, compat_right_block1, instr_1, compat_right_2, instr_2, );
 
 jsPsych.run(timeline);
 
