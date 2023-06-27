@@ -23,7 +23,7 @@ var timeline = [];
 
 
 var iat_imgs = [
-  {face: 'img/IAT_img/B0jpg.jpg'},
+  {face:'img/IAT_img/B0jpg.jpg'},
   {face:'img/IAT_img/B1jpg.jpg'},
   {face:'img/IAT_img/B2jpg.jpg'},
   {face:'img/IAT_img/B3jpg.jpg'},
@@ -45,6 +45,45 @@ var iat_imgs = [
   {face:'img/IAT_img/W9jpg.jpg'}
   ]
 
+  var combined_array = [
+  'img/IAT_img/B0jpg.jpg',
+  'img/IAT_img/B1jpg.jpg',
+  'img/IAT_img/B2jpg.jpg',
+  'img/IAT_img/B3jpg.jpg',
+  'img/IAT_img/B4jpg.jpg',
+  'img/IAT_img/B5jpg.jpg',
+  'img/IAT_img/B6jpg.jpg',
+  'img/IAT_img/B7jpg.jpg',
+  'img/IAT_img/B8jpg.jpg',
+  'img/IAT_img/B9jpg.jpg',
+  'img/IAT_img/W0jpg.jpg',
+  'img/IAT_img/W1jpg.jpg',
+  'img/IAT_img/W2jpg.jpg',
+  'img/IAT_img/W3jpg.jpg',
+  'img/IAT_img/W4jpg.jpg',
+  'img/IAT_img/W5jpg.jpg',
+  'img/IAT_img/W6jpg.jpg',
+  'img/IAT_img/W7jpg.jpg',
+  'img/IAT_img/W8jpg.jpg',
+  'img/IAT_img/W9jpg.jpg',
+  'Fabulous',
+  'Awful',
+  'Fantastic',
+  'Disgusting',
+  'Great',
+  'Lovely',
+  'Foul',
+  'Horrible',
+  'Horrid',
+  'Nice',
+  'Terrific',
+  'Nasty',
+  'Superb',
+  'Revolting',
+  'Wonderful',
+  'Terrible'
+  ]
+
 var iat_words = [
   {gword: 'Fabulous', bword: 'Awful'},
   {gword: 'Fantastic', bword: 'Disgusting'},
@@ -55,7 +94,6 @@ var iat_words = [
   {gword: 'Terrific', bword: 'Revolting'},
   {gword: 'Wonderful', bword: 'Terrible'}
 ]
-
 
 
 var iat_instructions = {
@@ -156,9 +194,9 @@ var instr_2 = {
 //combined black+unpleasant(left) and white+pleasant (right)
 var compat_right_3_img = {
   type: jsPsychIatImage,
-  stimulus: jsPsych.timelineVariable('face'),
+  stimulus: shuffledArray[0],
   stim_key_association: function(){
-    if (jsPsych.timelineVariable('face').indexOf('B') > -1){
+    if (stimulus.indexOf('B') > -1){
       return 'left';
     } else
     return 'right';
@@ -229,16 +267,15 @@ var compat_right_block1 = {
 
 var compat_right_block2 = {
   timeline: [compat_right_3_img],
-  timeline_variables: iat_imgs,
   randomize_order: true,
 }
 
-var compat_right_block_combine = { 
-  timeline: [compat_right_block2, compat_right_3_word],
-  randomize_order: true
+var compat_right_block_combine = {
+  timeline: [
+  compat_right_block2, 
+  compat_right_3_word
+  ] }
   
-}
-
 
 //note for later, code the first block for now but for when you have to do 4 different iat block choices
 //make the category labels (and maybe stim key assoc) variables so you can randomly go through and assign it according to 
@@ -251,7 +288,7 @@ var compat_right_block_combine = {
 //make only one parameter all: x. have x be an array with every parameter and in the stimulus make a conditional 
 //similar to how you presented choice key presses for the img vs html element
 
-timeline.push(iat_instructions,compat_right_block_combine, compat_right_3_word, compat_right_block1, instr_1, compat_right_2, instr_2, );
+timeline.push(iat_instructions,compat_right_block2, compat_right_3_word, compat_right_block1, instr_1, compat_right_2, instr_2, );
 
 jsPsych.run(timeline);
 
