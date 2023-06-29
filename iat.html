@@ -45,54 +45,84 @@ var iat_imgs = [
   {face:'img/IAT_img/W9jpg.jpg'}
   ]
 
+  var iat_word = [
+  {combined: 'Fabulous'},
+  {combined: 'Awful'},
+  {combined: 'Fantastic'},
+  {combined: 'Disgusting'},
+  {combined: 'Great'},
+  {combined: 'Lovely'},
+  {combined: 'Foul'},
+  {combined: 'Horrible'},
+  {combined: 'Horrid'},
+  {combined: 'Nice'},
+  {combined: 'Terrific'},
+  {combined: 'Nasty'},
+  {combined: 'Superb'},
+  {combined: 'Revolting'},
+  {combined: 'Wonderful'},
+  {combined: 'Terrible'}
+  ]
+  
   var combined_array = [
-  'img/IAT_img/B0jpg.jpg',
-  'img/IAT_img/B1jpg.jpg',
-  'img/IAT_img/B2jpg.jpg',
-  'img/IAT_img/B3jpg.jpg',
-  'img/IAT_img/B4jpg.jpg',
-  'img/IAT_img/B5jpg.jpg',
-  'img/IAT_img/B6jpg.jpg',
-  'img/IAT_img/B7jpg.jpg',
-  'img/IAT_img/B8jpg.jpg',
-  'img/IAT_img/B9jpg.jpg',
-  'img/IAT_img/W0jpg.jpg',
-  'img/IAT_img/W1jpg.jpg',
-  'img/IAT_img/W2jpg.jpg',
-  'img/IAT_img/W3jpg.jpg',
-  'img/IAT_img/W4jpg.jpg',
-  'img/IAT_img/W5jpg.jpg',
-  'img/IAT_img/W6jpg.jpg',
-  'img/IAT_img/W7jpg.jpg',
-  'img/IAT_img/W8jpg.jpg',
-  'img/IAT_img/W9jpg.jpg',
-  'Fabulous',
-  'Awful',
-  'Fantastic',
-  'Disgusting',
-  'Great',
-  'Lovely',
-  'Foul',
-  'Horrible',
-  'Horrid',
-  'Nice',
-  'Terrific',
-  'Nasty',
-  'Superb',
-  'Revolting',
-  'Wonderful',
-  'Terrible'
+  {combined: '<img src = img/IAT_img/B0jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B1jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B2jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B3jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B4jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B5jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B6jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B7jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B8jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/B9jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W0jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W1jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W2jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W3jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W4jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W5jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W6jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W7jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W8jpg.jpg>'},
+  {combined: '<img src = img/IAT_img/W9jpg.jpg>'},
+  {combined: 'Fabulous'},
+  {combined: 'Awful'},
+  {combined: 'Fantastic'},
+  {combined: 'Disgusting'},
+  {combined: 'Great'},
+  {combined: 'Lovely'},
+  {combined: 'Foul'},
+  {combined: 'Horrible'},
+  {combined: 'Horrid'},
+  {combined: 'Nice'},
+  {combined: 'Terrific'},
+  {combined: 'Nasty'},
+  {combined: 'Superb'},
+  {combined: 'Revolting'},
+  {combined: 'Wonderful'},
+  {combined: 'Terrible'}
   ]
 
-var iat_words = [
-  {gword: 'Fabulous', bword: 'Awful'},
-  {gword: 'Fantastic', bword: 'Disgusting'},
-  {gword: 'Great', bword: 'Foul'},
-  {gword: 'Lovely', bword: 'Horrible'},
-  {gword: 'Nice', bword: 'Horrid'},
-  {gword: 'Superb', bword: 'Nasty'},
-  {gword: 'Terrific', bword: 'Revolting'},
-  {gword: 'Wonderful', bword: 'Terrible'}
+var good_words = [
+  'Fabulous',
+  'Fantastic',
+  'Great',
+  'Lovely',
+  'Nice',
+  'Terrific',
+  'Superb',
+  'Wonderful',
+]
+
+var bad_words = [
+'Awful',
+'Disgusting',
+'Foul',
+'Horrible',
+'Horrid',
+'Nasty',
+'Revolting',
+'Terrible'
 ]
 
 
@@ -137,16 +167,25 @@ var instr_1 = {
   choices: " "
 }
 
-// unpleasant(left) and pleasant (right)
+//unpleasant (left) and pleasant (right)
 var compat_right_2 = {
-  timeline: [
-  {
   type: jsPsychIatHtml,
   stimulus: function(){
-    var stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('gword') + '</span>';
-    return stim
+    if(good_words.includes(jsPsych.timelineVariable('combined'))){
+      stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    } else{
+      stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    }
   },
-  stim_key_association: 'right',
+  stim_key_association: function(){
+    if (good_words.includes(jsPsych.timelineVariable('combined'))){
+        return 'right'
+      } else {
+        return 'left'
+      }
+  },
   html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
   bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
   force_correct_key_press: true,
@@ -157,29 +196,7 @@ var compat_right_2 = {
   left_category_label: ['Unpleasant'],
   right_category_label: ['Pleasant'],
   response_ends_trial: true
-  },
-
-  {
-  type: jsPsychIatHtml,
-  stimulus: function(){
-    var stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('bword') + '</span>';
-    return stim
-  } ,
-  stim_key_association: 'left',
-  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
-  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
-  force_correct_key_press: true,
-  display_feedback: true,
-  trial_duration: 3000, //Only if display_feedback is false
-  left_category_key: 'e',
-  right_category_key: 'i',
-  left_category_label: ['Unpleasant'],
-  right_category_label: ['Pleasant'],
-  response_ends_trial: true
-  }],
-  timeline_variables: iat_words,
-  randomize_order: true
-}
+  }
 
 //instructions for combined category change(black+unpleasant(left) and white+pleasant (right))
 var instr_2 = {
@@ -192,15 +209,35 @@ var instr_2 = {
 }
 
 //combined black+unpleasant(left) and white+pleasant (right)
-var compat_right_3_img = {
-  type: jsPsychIatImage,
-  stimulus: shuffledArray[0],
+var compat_right_3_combined = {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
+      return jsPsych.timelineVariable('combined')
+    } 
+    else if(good_words.includes(jsPsych.timelineVariable('combined'))){
+      stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    } else{
+      stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    }
+  },
   stim_key_association: function(){
-    if (stimulus.indexOf('B') > -1){
-      return 'left';
-    } else
-    return 'right';
-    },
+    if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
+      if (jsPsych.timelineVariable('combined').indexOf('B') > -1){
+        return 'left';
+      } else
+        return 'right';
+        }
+    else{
+      if (good_words.includes(jsPsych.timelineVariable('combined'))){
+        return 'right'
+      } else {
+        return 'left'
+      }
+    }
+  },
   html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
   bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
   force_correct_key_press: true,
@@ -212,51 +249,6 @@ var compat_right_3_img = {
   right_category_label: ['White Americans or Pleasant'],
   response_ends_trial: true
 }
-
-//words combined black+unpleasant(left) and white+pleasant (right)
-var compat_right_3_word = {
-  timeline: [
-  {
-  type: jsPsychIatHtml,
-  stimulus: function(){
-    var stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('gword') + '</span>';
-    return stim
-  },
-  stim_key_association: 'right',
-  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
-  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
-  force_correct_key_press: true,
-  display_feedback: true,
-  trial_duration: 3000, //Only if display_feedback is false
-  left_category_key: 'e',
-  right_category_key: 'i',
-  left_category_label: ['Black Americans or Unpleasant'],
-  right_category_label: ['White Americans or Pleasant'],
-  response_ends_trial: true
-  },
-
-  {
-  type: jsPsychIatHtml,
-  stimulus: function(){
-    var stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('bword') + '</span>';
-    return stim
-  } ,
-  stim_key_association: 'left',
-  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
-  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
-  force_correct_key_press: true,
-  display_feedback: true,
-  trial_duration: 3000, //Only if display_feedback is false
-  left_category_key: 'e',
-  right_category_key: 'i',
-  left_category_label: ['Black Americans or Unpleasant'],
-  right_category_label: ['White Americans or Pleasant'],
-  response_ends_trial: true
-  }],
-  timeline_variables: iat_words,
-  randomize_order: true
-}
-
 
 
 var compat_right_block1 = {
@@ -266,16 +258,18 @@ var compat_right_block1 = {
 }
 
 var compat_right_block2 = {
-  timeline: [compat_right_3_img],
-  randomize_order: true,
+  timeline: [compat_right_2],
+  timeline_variables: iat_word,
+  randomize_order: true
 }
 
-var compat_right_block_combine = {
-  timeline: [
-  compat_right_block2, 
-  compat_right_3_word
-  ] }
+var combined_block = {
+  timeline: [compat_right_3_combined],
+  timeline_variables: combined_array,
+  randomize_order: true,
+}
   
+
 
 //note for later, code the first block for now but for when you have to do 4 different iat block choices
 //make the category labels (and maybe stim key assoc) variables so you can randomly go through and assign it according to 
@@ -288,7 +282,7 @@ var compat_right_block_combine = {
 //make only one parameter all: x. have x be an array with every parameter and in the stimulus make a conditional 
 //similar to how you presented choice key presses for the img vs html element
 
-timeline.push(iat_instructions,compat_right_block2, compat_right_3_word, compat_right_block1, instr_1, compat_right_2, instr_2, );
+timeline.push(iat_instructions, compat_right_block1, instr_1, compat_right_block2, instr_2, combined_block);
 
 jsPsych.run(timeline);
 
