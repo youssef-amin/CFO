@@ -209,7 +209,7 @@ var instr_2 = {
 }
 
 //combined black+unpleasant(left) and white+pleasant (right)
-var compat_right_3_combined = {
+var compat_right_combined_1 = {
   type: jsPsychIatHtml,
   stimulus: function(){
     if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
@@ -250,6 +250,67 @@ var compat_right_3_combined = {
   response_ends_trial: true
 }
 
+var compat_right_4 = {
+  type: jsPsychIatImage,
+  stimulus: jsPsych.timelineVariable('face'),
+  stim_key_association: function(){
+    if (jsPsych.timelineVariable('face').indexOf('B') > -1){
+      return 'right';
+    } else
+    return 'left';
+    },
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['White Americans'],
+  right_category_label: ['Black Americans'],
+  response_ends_trial: true
+}
+
+var compat_right_combined_2 = {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
+      return jsPsych.timelineVariable('combined')
+    } 
+    else if(good_words.includes(jsPsych.timelineVariable('combined'))){
+      stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    } else{
+      stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    }
+  },
+  stim_key_association: function(){
+    if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
+      if (jsPsych.timelineVariable('combined').indexOf('B') > -1){
+        return 'right';
+      } else
+        return 'left';
+        }
+    else{
+      if (good_words.includes(jsPsych.timelineVariable('combined'))){
+        return 'right'
+      } else {
+        return 'left'
+      }
+    }
+  },
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['White Americans or Unpleasant'],
+  right_category_label: ['Black Americans or Pleasant'],
+  response_ends_trial: true
+}
 
 var compat_right_block1 = {
   timeline: [compat_right_1],
@@ -263,26 +324,42 @@ var compat_right_block2 = {
   randomize_order: true
 }
 
-var combined_block = {
-  timeline: [compat_right_3_combined],
+var combined_block_1 = {
+  timeline: [compat_right_combined_1],
   timeline_variables: combined_array,
   randomize_order: true,
 }
-  
 
+var compat_right_block3 = {
+  timeline: [compat_right_4],
+  timeline_variables: iat_imgs,
+  randomize_order: true,
+}
 
-//note for later, code the first block for now but for when you have to do 4 different iat block choices
-//make the category labels (and maybe stim key assoc) variables so you can randomly go through and assign it according to 
-//whichever block is randomly chosen. can change the variable names compat_right etc later
+var combined_block_2 = {
+  timeline: [compat_right_combined_2],
+  timeline_variables: combined_array,
+  randomize_order: true,
+}
 
-//still need to fix undefined in iat_combined for compat_right_3 
+var instr_3 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus:'<p> The categories will now switch sides. </p>' +
+  '<p>Remember to try to go as fast as you can while making as few errors as possible. Correct errors by hitting the other key. </p>' +
+  '<p>When you are ready, please press the [Space] bar to begin. </p>',
+  choices: " "
+}
 
-//set gword, face, bword to a another array. example gword: x and x is x = [blah]. 
+var instr_4 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus:'<p> Notice the four categories have been combined again, but in a new configuration. </p>' +
+  '<p>Remember to try to go as fast as you can while making as few errors as possible. Correct errors by hitting the other key. </p>' +
+  '<p>When you are ready, please press the [Space] bar to begin. </p>',
+  choices: " "
+}
 
-//make only one parameter all: x. have x be an array with every parameter and in the stimulus make a conditional 
-//similar to how you presented choice key presses for the img vs html element
-
-timeline.push(iat_instructions, compat_right_block1, instr_1, compat_right_block2, instr_2, combined_block);
+timeline.push(iat_instructions, compat_right_block1, instr_1, compat_right_block2, instr_2, combined_block_2 , instr_3, compat_right_block3, 
+instr_4, combined_block_2);
 
 jsPsych.run(timeline);
 
