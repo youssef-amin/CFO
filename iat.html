@@ -493,17 +493,31 @@ compat_right = [
 ]
 
 incompat_right = [
-  iat_instructions, black_left_block, pleasant_left_block, instr_2, black_pleasant_block, instr_3, white_left_block,
+  iat_instructions, black_left_block, instr_1, pleasant_left_block, instr_2, black_pleasant_block, instr_3, white_left_block,
   instr_4, white_pleasant_block
 ]
 
 compat_left = [
-  
+  iat_instructions, white_left_block, instr_1, pleasant_left_block, instr_2, white_pleasant_block, instr_3, black_left_block,
+  instr_4, black_pleasant_block
 ]
 
-incompat_left = []
+incompat_left = [
+  iat_instructions, white_left_block, instr_1, unpleasant_left_block, instr_2, white_unpleasant_block, instr_3, 
+  black_left_block, instr_4, black_unpleasant_block
+]
 
-timeline.push();
+random_array = [
+  compat_right, incompat_right, compat_right, incompat_left
+]
+
+active_iat_block = random_array[Math.floor(Math.random() * random_array.length)]
+
+for (i = 0; i < active_iat_block.length; i++) {
+  timeline.push(active_iat_block[i]);
+};
+
+
 
 jsPsych.run(timeline);
 
