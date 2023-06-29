@@ -137,7 +137,7 @@ var iat_instructions = {
 };
 
 // black (left) and white (right)
-var compat_right_1 = {
+var black_left_1 = {
   type: jsPsychIatImage,
   stimulus: jsPsych.timelineVariable('face'),
   stim_key_association: function(){
@@ -168,7 +168,7 @@ var instr_1 = {
 }
 
 //unpleasant (left) and pleasant (right)
-var compat_right_2 = {
+var unpleasant_left_1 = {
   type: jsPsychIatHtml,
   stimulus: function(){
     if(good_words.includes(jsPsych.timelineVariable('combined'))){
@@ -198,6 +198,36 @@ var compat_right_2 = {
   response_ends_trial: true
   }
 
+  var pleasant_left_1 = {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    if(good_words.includes(jsPsych.timelineVariable('combined'))){
+      stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    } else{
+      stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    }
+  },
+  stim_key_association: function(){
+    if (good_words.includes(jsPsych.timelineVariable('combined'))){
+        return 'left'
+      } else {
+        return 'right'
+      }
+  },
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Pleasant'],
+  right_category_label: ['Unpleasant'],
+  response_ends_trial: true
+  }
+
 //instructions for combined category change(black+unpleasant(left) and white+pleasant (right))
 var instr_2 = {
   type: jsPsychHtmlKeyboardResponse,
@@ -209,7 +239,7 @@ var instr_2 = {
 }
 
 //combined black+unpleasant(left) and white+pleasant (right)
-var compat_right_combined_1 = {
+var black_unpleasant_combined = {
   type: jsPsychIatHtml,
   stimulus: function(){
     if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
@@ -250,7 +280,48 @@ var compat_right_combined_1 = {
   response_ends_trial: true
 }
 
-var compat_right_4 = {
+var black_pleasant_combined = {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
+      return jsPsych.timelineVariable('combined')
+    } 
+    else if(good_words.includes(jsPsych.timelineVariable('combined'))){
+      stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    } else{
+      stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    }
+  },
+  stim_key_association: function(){
+    if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
+      if (jsPsych.timelineVariable('combined').indexOf('B') > -1){
+        return 'left';
+      } else
+        return 'right';
+        }
+    else{
+      if (good_words.includes(jsPsych.timelineVariable('combined'))){
+        return 'left'
+      } else {
+        return 'right'
+      }
+    }
+  },
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['Black Americans or Pleasant'],
+  right_category_label: ['White Americans or Unleasant'],
+  response_ends_trial: true
+}
+
+var white_left_1 = {
   type: jsPsychIatImage,
   stimulus: jsPsych.timelineVariable('face'),
   stim_key_association: function(){
@@ -271,7 +342,7 @@ var compat_right_4 = {
   response_ends_trial: true
 }
 
-var compat_right_combined_2 = {
+var white_unpleasant_combined = {
   type: jsPsychIatHtml,
   stimulus: function(){
     if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
@@ -312,36 +383,94 @@ var compat_right_combined_2 = {
   response_ends_trial: true
 }
 
-var compat_right_block1 = {
-  timeline: [compat_right_1],
+var white_pleasant_combined = {
+  type: jsPsychIatHtml,
+  stimulus: function(){
+    if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
+      return jsPsych.timelineVariable('combined')
+    } 
+    else if(good_words.includes(jsPsych.timelineVariable('combined'))){
+      stim = '<span style="color: green; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    } else{
+      stim = '<span style="color: red; font-size: 40px">' +jsPsych.timelineVariable('combined') + '</span>';
+      return stim
+    }
+  },
+  stim_key_association: function(){
+    if (jsPsych.timelineVariable('combined').indexOf('/') > -1){
+      if (jsPsych.timelineVariable('combined').indexOf('B') > -1){
+        return 'right';
+      } else
+        return 'left';
+        }
+    else{
+      if (good_words.includes(jsPsych.timelineVariable('combined'))){
+        return 'left'
+      } else {
+        return 'right'
+      }
+    }
+  },
+  html_when_wrong: '<span style="color: red; font-size: 80px">X</span>',
+  bottom_instructions: 'Remember, if you make an error an X will appear. Please press the other button to continue if this occurs',
+  force_correct_key_press: true,
+  display_feedback: true,
+  trial_duration: 3000, //Only if display_feedback is false
+  left_category_key: 'e',
+  right_category_key: 'i',
+  left_category_label: ['White Americans or Unpleasant'],
+  right_category_label: ['Black Americans or Pleasant'],
+  response_ends_trial: true
+}
+
+var black_left_block = {
+  timeline: [black_left_1],
   timeline_variables: iat_imgs,
   randomize_order: true,
 }
 
-var compat_right_block2 = {
-  timeline: [compat_right_2],
+var unpleasant_left_block = {
+  timeline: [unpleasant_left_1],
   timeline_variables: iat_word,
   randomize_order: true
 }
 
-var combined_block_1 = {
-  timeline: [compat_right_combined_1],
+var pleasant_left_block = {
+  timeline: [pleasant_left_1],
+  timeline_variables: iat_word,
+  randomize_order: true
+}
+
+var black_unpleasant_block = {
+  timeline: [black_unpleasant_combined],
   timeline_variables: combined_array,
   randomize_order: true,
 }
 
-var compat_right_block3 = {
-  timeline: [compat_right_4],
+var black_pleasant_block = {
+  timeline: [black_pleasant_combined],
+  timeline_variables: combined_array,
+  randomize_order: true,
+}
+
+var white_left_block = {
+  timeline: [white_left_1],
   timeline_variables: iat_imgs,
   randomize_order: true,
 }
 
-var combined_block_2 = {
-  timeline: [compat_right_combined_2],
+var white_unpleasant_block = {
+  timeline: [white_unpleasant_combined],
   timeline_variables: combined_array,
   randomize_order: true,
 }
 
+var white_pleasant_block = {
+  timeline: [white_pleasant_combined],
+  timeline_variables: combined_array,
+  randomize_order: true,
+}
 var instr_3 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:'<p> The categories will now switch sides. </p>' +
@@ -358,8 +487,23 @@ var instr_4 = {
   choices: " "
 }
 
-timeline.push(iat_instructions, compat_right_block1, instr_1, compat_right_block2, instr_2, combined_block_2 , instr_3, compat_right_block3, 
-instr_4, combined_block_2);
+compat_right = [
+  iat_instructions, black_left_block, instr_1, unpleasant_left_block, instr_2, black_unpleasant_block, instr_3,
+  white_left_block, instr_4, white_unpleasant_combined
+]
+
+incompat_right = [
+  iat_instructions, black_left_block, pleasant_left_block, instr_2, black_pleasant_block, instr_3, white_left_block,
+  instr_4, white_pleasant_block
+]
+
+compat_left = [
+  
+]
+
+incompat_left = []
+
+timeline.push();
 
 jsPsych.run(timeline);
 
