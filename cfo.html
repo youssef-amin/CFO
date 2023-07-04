@@ -1,31 +1,144 @@
 <!DOCTYPE HTML>
-<head>
-    <script src = 'https://unpkg.com/jspsych@7.3.3'></script>  <!--This loads the jsPsych package-->
-    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script> <!--This loads in the plugin that shows text on the screen-->
-    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script> <!--This loads in the plugin that shows images and then records a response-->
-    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script> <!--This loads in the plugin that preloads your images for your participant-->
-    <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.1.1/css/survey.css">
-    <link rel="stylesheet" type="text/css" href="styles/site.css" />
-</head>
-</html>
 
-<script>
-var jsPsych = initJsPsych({
-      on_finish: function(){
+<head>
+
+  <head>
+    <style>
+      .circle {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        font-size: 30px;
+        color: black;
+        text-align: center;
+        background: #000;
+        border: solid black 1px;
+        background: white
+      }
+
+      .circle:after {
+        content: "";
+        width: 100%;
+        background-color: black;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+      }
+
+      .guarantee {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        font-size: 30px;
+        color: black;
+        text-align: center;
+        background: #000;
+        border: solid black 1px;
+        background: white
+      }
+    </style>
+    <script src='https://unpkg.com/jspsych@7.3.3'></script> <!--This loads the jsPsych package-->
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+    <!--This loads in the plugin that shows text on the screen-->
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script>
+    <!--This loads in the plugin that shows images and then records a response-->
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
+    <!--This loads in the plugin that preloads your images for your participant-->
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <style>
+      #jspsych-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+
+  </html>
+
+  <script>
+    //DEFAULT: guarantee on left
+    //if reverse_code = 0, e key press is guarantee
+    //shuffle function to use on values
+
+
+    var jsPsych = initJsPsych({
+      on_finish: function () {
         jsPsych.data.displayData();
       }
     });
 
 
-fee = 3
-var timeline = [];
+    var s_index = 0
+    var s_reversecodes = []
 
-var consent = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus:
-  //<div style="text-align: left;"><span style="font-size:22px;">
-    `<u><h1>Consent Form</h1></u>
+    var b_index = 0
+    var b_reversecodes = []
+
+    var w_index = 0
+    var w_reversecodes = []
+
+    let s_index_array = Array.from({ length: 90 }, (_, i) => i);
+    let w_index_array = Array.from({ length: 90 }, (_, i) => i);
+    let b_index_array = Array.from({ length: 90 }, (_, i) => i);
+
+    // Creates random indexes for self, black, white values to be used on field1,2,3
+    for (let i = s_index_array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [s_index_array[i], s_index_array[j]] = [s_index_array[j], s_index_array[i]];
+    }
+
+    for (let i = w_index_array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [w_index_array[i], w_index_array[j]] = [w_index_array[j], w_index_array[i]];
+    }
+
+    for (let i = b_index_array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [b_index_array[i], w_index_array[j]] = [b_index_array[j], b_index_array[i]];
+    }
+
+
+
+
+    //gamble wins
+    let field1 = [2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5,
+      6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10,
+      10, 10, 10, 10, 12, 12, 12, 12, 12, 12, 12, 12, 5, 5, 8, 8, 3.25, 4, 4, 5, 5, 7,
+      8, 7, 8, 12, 12, 13, 10, 11, 13, 19, 17, 25, 17, 22, 25, 26, 24, 30, 22, 28];
+
+    //gamble losses
+    let field2 = [3.75, 3.25, 2.75, 2.25, 1.75, 1.25, 0.75, 8, 7, 6, 5,
+      4, 3, 2, 1, 9.38, 8.13, 6.88, 5.63, 4.38, 3.13, 1.88, 12, 10.5, 9,
+      7.5, 6, 4.5, 3, 1.5, 15, 13, 11, 9, 7, 5, 3, 18, 15.75, 13.5, 11.25,
+      9, 6.75, 4.5, 2.25, 18.75, 16.25, 13.75, 11.25, 8.75, 6.25, 3.75, 24,
+      21, 18, 15, 12, 9, 6, 3, 5, 2.5, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    //guarantees
+    let field3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2.25, 2, 3, 3, 3, 4, 4.25, 4,
+      5, 5, 6, 6, 6, 8, 9, 9, 10, 10, 10, 10, 12, 12, 13, 13];
+
+
+    fee = 3
+    var timeline = [];
+
+    var consent = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus:
+        //<div style="text-align: left;"><span style="font-size:22px;">
+        `<u><h1>Consent Form</h1></u>
      <br>
      This survey should take about 25 minutes. You will be compensated with a flat rate of $${fee} for participation.
      <br>
@@ -44,17 +157,158 @@ var consent = {
     <br><br>
     If you consent to take part in this survey, please <b>press the space bar to advance.</b>
    `
-    //</div>
-        ,
-  choices: " "
-}
- 
+      //</div>
+      ,
+      choices: " "
+    }
+
+
+    const circles = {
+      guar: `    
+      <guar></guar><div style="flex: 1; text-align: center;">
+        <div class="guarantee" style = "margin: auto;">
+          <div id="guar"><span style="color:#ffffff;">$</span></div>
+        </div> 
+      </div>`,
+      gamble: `<gamble></gamble><div style="flex: 1; text-align: center;">
+          <div class="circle" style = "margin: auto;">
+            <div id="field1"><span style="color:#ffffff;">+ $</span></div>
+            <div id="field2"><span style="color:#ffffff;">- $</span></div>
+          </div>
+      </div>`}
+    var guarOrGamb = [circles.guar, circles.gamble];
 
 
 
-timeline.push(consent);
+    function createResultTrial(resultMessage) {
+      return {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: resultMessage,
+        choices: [],  // no response needed, the trial ends after 'trial_duration'
+        trial_duration: 2000  // show the result for 2 seconds
+      };
+    }
 
-jsPsych.run(timeline);
+
+    function createSELFtrials() {
+      return {
+        type: jsPsychHtmlKeyboardResponse,
+        prompt: `<br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option.</b><br>`,
+        stimulus: function () {
+          return `<SELF></SELF>
+    <br><div style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 275px; height: 275px;"></div>
+    <div>&nbsp;</div>
+    <div style="text-align: center;"><strong>You</strong></div><div style="text-align: center;"><strong><br></strong></div>
+    Choose one of the following. The gamble decision has a 50% outcome for either of the presented outcomes.&nbsp; The sure bet has a 100% chance of the presented outcome.<br><br>
+                
+    <div style="display: flex; justify-content: space-between;">
+                ${guarOrGamb[0]}${guarOrGamb[1]}
+    </div>`},
+        choices: ['e', 'i'],
+        on_load: function () {
+          window.focus();
+          if (guarOrGamb[0] == circles.guar) {
+            s_reversecodes[s_index] = 0
+          } else {
+            s_reversecodes[s_index] = 1
+          };//whether this trial has guar on left (e) or not
+          document.getElementById("guar").innerHTML = '+$' + field3[s_index_array[s_index]];
+          document.getElementById("field1").innerHTML = '+$' + field1[s_index_array[s_index]];
+          document.getElementById("field2").innerHTML = '-$' + field2[s_index_array[s_index]];
+          s_index += 1
+        },
+        on_finish: function (data) {
+          guarOrGamb = guarOrGamb.sort(() => Math.random() - 0.5); //at the end of each trial, position of guar or gamble is randomized
+          if (s_reversecodes[s_index - 1] == 0) {
+            switch (data.response) {
+              case 'e':
+                result = "guarantee";
+                break;
+              default:
+                result = "gamble";
+                break;
+            }
+          } else {
+            switch (data.response) {
+              case 'i':
+                result = "guarantee";
+                break;
+              default:
+                result = "gamble";
+                break;
+            }
+          }
+          data.response = result;
+
+          var resultMessage;
+          if (data.response == 'guarantee') {
+            resultMessage = `You took the guaranteed amount and gained $${field3[s_index_array[s_index - 1]]}!`
+          } else {
+            var index = (Math.random() >= 0.5) ? 1 : 0;
+            var message = {
+              outcome: ['won', 'lost'],
+              amount: [field1[s_index_array[s_index - 1]], field2[s_index_array[s_index - 1]]]
+            }
+            resultMessage = `You took the gamble and ${message.outcome[index]} $${message.amount[index]}!`
+          }
+
+          var resultTrial = createResultTrial(resultMessage);
+          jsPsych.addNodeToTimeline({node: {timeline: [createResultTrial(resultMessage)]}}, data);
+        }
+        //console.log(result);
+      }
+    }
 
 
-</script>
+
+
+
+
+    timeline.push(consent);
+
+    for (let i = 0; i < 4; i++) {
+      timeline.push(createSELFtrials());
+    }
+
+    jsPsych.run(timeline);
+
+
+  </script>
+
+
+  <!-- 
+var decTrial2 = {
+  type: jsPsychSurveyMultiChoice,
+  questions: [
+    {
+    prompt: `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 275px; height: 275px;"></div>
+    <div>&nbsp;</div>
+    <div style="text-align: center;"><strong>You</strong></div><div style="text-align: center;"><strong><br></strong></div>
+    <div style="text-align: center;">Choose one of the following. The gamble decision has a 50% outcome for either of the presented outcomes.&nbsp; The sure bet has a 100% chance of the presented outcome.<br><br>
+    <b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option.</b><br></div>`,
+    name: 'decTrial',
+    options: [`                <div class='guarantee'>
+                <div id='guar'><span style='color:#ffffff;'>$</span></div>
+                </div> `,
+
+
+                `   <div class='circle'>
+                <div id='field1'><span style='color:#ffffff;'>+ $</span></div>
+
+                <div id='field2'><span style='color:#ffffff;'>- $</span></div>
+                </div>`
+              ],
+    randomize_question_order: true,
+    horizontal: true
+
+  }
+],
+on_load: function(){
+  document.getElementById("guar").innerHTML = '+$'+field3[s_index];
+	document.getElementById("field1").innerHTML = '+$'+field1[s_index];
+	document.getElementById("field2").innerHTML = '-$'+field2[s_index]; 
+  s_index+=1
+},
+  
+} -->
