@@ -130,6 +130,7 @@
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2.25, 2, 3, 3, 3, 4, 4.25, 4,
       5, 5, 6, 6, 6, 8, 9, 9, 10, 10, 10, 10, 12, 12, 13, 13];
 
+      var resultMessage = '';
 
     fee = 3
     var timeline = [];
@@ -191,7 +192,7 @@
 
 
     function createSELFtrials() {
-      return {
+      var decisionTrial = {
         type: jsPsychHtmlKeyboardResponse,
         prompt: `<br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option.</b><br>`,
         stimulus: function () {
@@ -243,6 +244,10 @@
           var resultMessage;
           if (data.response == 'guarantee') {
             resultMessage = `You took the guaranteed amount and gained $${field3[s_index_array[s_index - 1]]}!`
+            var message = {
+              amount: [field3[s_index_array[s_index - 1]], field3[s_index_array[s_index - 1]]]
+            }
+            var index = 0;
           } else {
             var index = (Math.random() >= 0.5) ? 1 : 0;
             var message = {
@@ -250,14 +255,27 @@
               amount: [field1[s_index_array[s_index - 1]], field2[s_index_array[s_index - 1]]]
             }
             resultMessage = `You took the gamble and ${message.outcome[index]} $${message.amount[index]}!`
+            console.log(resultMessage);
           }
+          jsPsych.data.addDataToLastTrial({ resultMessage: resultMessage });
+          jsPsych.data.addDataToLastTrial({ outcome: message.amount[index]})
 
-          var resultTrial = createResultTrial(resultMessage);
-          jsPsych.addNodeToTimeline({node: {timeline: [createResultTrial(resultMessage)]}}, data);
         }
-        //console.log(result);
       }
-    }
+      var resultTrial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: function () {
+
+          return `<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 30px;">` + 
+            jsPsych.data.getLastTrialData().trials[0].resultMessage; + `</div>`
+        },
+        choices: '',
+        trial_duration: 1000
+      }
+      return {timeline: [decisionTrial, resultTrial]}
+    };
+
+
 
 
 
