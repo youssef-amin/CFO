@@ -53,6 +53,7 @@
     <!--This loads in the plugin that shows images and then records a response-->
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
     <!--This loads in the plugin that preloads your images for your participant-->
     <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
     <style>
@@ -77,6 +78,7 @@
       }
     });
 
+    var base_endowment = '$' + '5'
 
     var s_index = 0
     var s_reversecodes = []
@@ -135,6 +137,11 @@
     fee = 3
     var timeline = [];
 
+    var prolific_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+    jsPsych.data.addProperties({
+      prolific_id: prolific_id
+    });
+
     var consent = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
@@ -163,6 +170,69 @@
       choices: " "
     }
 
+    const get_id = {
+      type: jsPsychSurveyText,
+      questions: [{prompt: "Prolific ID:", value: prolific_id}],
+      preamble: ["Please enter your Prolific ID below.<br><br>If you do not enter your ID accurately, we may not be able to pay you the correct amount."],
+      data:{
+        task: 'prolific_id'
+      },
+      on_finish: function(data) {
+          given_id = data.response.Q0;
+          jsPsych.data.addProperties({
+    	      given_id: given_id,
+
+	      });
+      }
+    };
+
+    var survey_instructions = {
+      timeline: [
+      {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: '<p> This is a study about monetary decision-making. We want to know how you make decisions for yourself and for others. ' +
+      'First, continue to read the instructions and see the photos of the other participants you will be making decisions for today. <p>' +
+      '<p> You can press the space bar to progress through the pages in this study. </p>',
+      choices: " "
+      },
+
+      {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+          return `<SELF></SELF>
+    <br><div style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 275px; height: 275px;"></div>
+    <div>&nbsp;</div>
+    <div style="text-align: center;"><strong>You</strong></div><div style="text-align: center;"><strong><br></strong></div>` +
+    '<p> This is a study about monetary decision-making, so to start things off, we have just endowed you with ' + base_endowment + '</p>' +
+    '<p> This is now your money! If you do well in the study today, we will just add to that, and pay you more (potentially twice that). ' + 
+    'If you do poorly, you will have to give me some of that back, but for all intents and purposes, that is now your money. </p>' +
+    '<p><b> Please press the space bar to advance.</b></p>'
+    },
+    choices: " "
+    },
+
+    {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `<p> Next you will be deciding for people from our previous group of respondents. 
+      At the end of the study, you will also be given the option to opt-in to send a picture for use in a future decision-making study 
+      where you could potentially receive money based on other's choices. Further elaboration regarding clothing requirements and picture formatting 
+      will be given at the end of the study if you choose to opt-in. </p>` +
+      '<p><b> Please press the space bar to advance.</b></p>',
+      choices: " "
+      },
+    ]};
+
+  var decoy_database = {
+    timeline: [
+    {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function () {
+          return 
+    },
+    choices: " "
+    }
+    ]
+  }
 
     const circles = {
       guar: `    
@@ -282,7 +352,7 @@
 
 
 
-    timeline.push(consent);
+    timeline.push(consent, get_id, survey_instructions);
 
     for (let i = 0; i < 4; i++) {
       timeline.push(createSELFtrials());
