@@ -125,6 +125,7 @@ var bad_words = [
 'Terrible'
 ]
 
+
 var iat_instructions = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:'<h1>Instructions:</h1> <p> Place your left and right index fingers on the E and I keys. At the top of the screen are 2 categories. </p>' +
@@ -316,7 +317,7 @@ var black_pleasant_combined = {
   left_category_key: 'e',
   right_category_key: 'i',
   left_category_label: ['Black Americans or Pleasant'],
-  right_category_label: ['White Americans or Unleasant'],
+  right_category_label: ['White Americans or Unpleasant'],
   response_ends_trial: true
 }
 
@@ -423,16 +424,24 @@ var white_pleasant_combined = {
   response_ends_trial: true
 }
 
+
 var black_left_block = {
   timeline: [black_left_1],
   timeline_variables: iat_imgs,
-  randomize_order: true
+  randomize_order: true,
+  on_finish: function(){
+    jsPsych.data.addProperties(
+      {correctChoice: function(){
+        return 'black'
+      }}
+        )
+  }
 }
 
 var unpleasant_left_block = {
   timeline: [unpleasant_left_1],
   timeline_variables: iat_word,
-  randomize_order: true
+  randomize_order: true,
 }
 
 var pleasant_left_block = {
@@ -457,7 +466,7 @@ var white_left_block = {
   timeline: [white_left_1],
   timeline_variables: iat_imgs,
   randomize_order: true,
-}
+  }
 
 var white_unpleasant_block = {
   timeline: [white_unpleasant_combined],
@@ -512,12 +521,16 @@ random_array = [
 
 active_iat_block = random_array[Math.floor(Math.random() * random_array.length)]
 
+data = []
+
 for (i = 0; i < active_iat_block.length; i++) {
   timeline.push(active_iat_block[i]);
 };
 
 jsPsych.run(timeline);
 
+
+  
 jsPsych.data.addProperties(
   {correctChoice: function(){
     const lastTrial = jsPsych.data.get().last(1).values()[0];
