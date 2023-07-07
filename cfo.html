@@ -138,20 +138,21 @@
     var timeline = [];
 
     var fake_face_array = [
-      "img/Null_Lures/img/Null_Lures/CFD-AF-216-106-N.jpg",
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/CFD-AF-222-134-N.jpg" ,
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/CFD-AM-234-355-N.jpg" ,
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/CFD-BF-207-004-N.jpg" ,
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/CFD-BM-218-132-N.jpg" ,
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/CFD-BM-249-235-N.jpg" , 
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/CFD-LF-202-065-N.jpg" ,
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/image.png" ,
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/image (1).png" ,
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/image (3).png" ,
-      "img/Null_Lures/img/Null_Lures/img/Null_Lures/image (4).png"
+      '<img src = "img/Null_Lures/CFD-AF-216-106-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = "img/Null_Lures/CFD-AF-222-134-N.jpg" style = "width: 200px; height: 200px;">' ,
+      '<img src = img/Null_Lures/CFD-AM-234-355-N.jpg" style = "width: 200px; height: 200px;">' ,
+      '<img src = img/Null_Lures/CFD-BF-207-004-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = img/Null_Lures/CFD-BM-218-132-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = img/Null_Lures/CFD-BM-249-235-N.jpg" style = "width: 200px; height: 200px;">', 
+      '<img src = img/Null_Lures/CFD-LF-202-065-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = img/Null_Lures/image.png" style = "width: 200px; height: 200px;">',
+      '<img src = img/Null_Lures/image_2.png" style = "width: 200px; height: 200px;">',
+      '<img src = img/Null_Lures/image_3.png" style = "width: 200px; height: 200px;">',
+      '<img src = img/Null_Lures/image_4.png" style = "width: 200px; height: 200px;">'
     ]
-    var randomized_fakes = fake_face_array[Math.floor(Math.random() * fake_face_array.length)]
-
+    var randomized_fakes = jsPsych.randomization.repeat(fake_face_array, 1)
+    console.log(randomized_fakes)
+    
     var prolific_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
     jsPsych.data.addProperties({
       prolific_id: prolific_id
@@ -241,19 +242,20 @@
     timeline: [
     {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: function () {
-          return `This is a group of participants that chose to opt-in from our previous group of respondents. 
+      stimulus: function(){
+        return `This is a group of participants that chose to opt-in from our previous group of respondents. 
           We will select&nbsp;<strong>two</strong>&nbsp;of them via a random number generator for you to make decisions for, 
-          and you will be managing their endowments on their behalf.<br>` +
+          and you will be managing their endowments on their behalf.<br>` + 
         '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
-        '<tbody><tr><td style="text-align: center;"><img src = "randomized_fakes[0]"></td>' +
-        //<td style="text-align: center;"><img src="randomized_fakes[1]" style="width: 200px; height: 200px;"></td>
-        //<td style="text-align: center;"><img src="randomized_fakes[2]" style="width: 200px; height: 200px;"></td>
-        //<td style="text-align: center;"><img src="randomized_fakes[3]" style="width: 200px; height: 200px;"></td>
-        //<td style="text-align: center;"><img src="randomized_fakes[4]" style="width: 200px; height: 200px;"></td>
+        '<tbody><tr><td style="text-align: center;">' + randomized_fakes[0] + '</td>' +
+        '<td style="text-align: center;">' + randomized_fakes[1] + '</td>' +
+        '<td style="text-align: center;">' + randomized_fakes[2] + '</td>' +
+        '<td style="text-align: center;">' + randomized_fakes[3] + '</td>' +
+        '<td style="text-align: center;">' + randomized_fakes[4] + '</td>' 
         '</tr></tbody></table>'
-    },
-    choices: " "
+      }
+    ,
+    choices: " ",
     }
     ]
   }
