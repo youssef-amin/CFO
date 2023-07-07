@@ -54,6 +54,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
     <!--This loads in the plugin that preloads your images for your participant-->
     <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
     <style>
@@ -269,13 +270,50 @@
         '<td style="text-align: center;">' + randomized_fakes[10] + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[3] + '</td>' +
         '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' 
+        '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
         '</tr></tbody></table>' 
-
       }
     ,
     choices: " ",
+    },
+
+    {
+    type: jsPsychImageButtonResponse,
+    stimulus: 'img/Null_Lures/loading_gif.gif',
+    prompt: 'Please wait while we select faces from our database',
+    trial_duration: 5000,
+    choices: []
     }
+    ]
+  }
+
+  var money_distribution = {
+    timeline: [
+      {
+      type: jsPsychImageKeyboardResponse,
+      stimulus: function(){
+        return '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
+        '<tbody><tr>' +
+        '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td>' +
+        '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td>' +
+        '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td></tr>' +
+        '<tr>' +
+        '<SELF></SELF>' +
+      '<td style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 190px; height: 190px;" />&nbsp; &nbsp; &nbsp;</td>' +
+      '<td style="text-align: center;"><img src="personA placeholder" style="width: 250px; height: 250px;" /></td>' +
+      '<td style="text-align: center;"><img src="personB placeholder" style="width: 250px; height: 250px;" /></td></tr>' +
+      '<tr>'
+      '<td style="text-align: center;"><span style="font-size:26px;">You</span></td>' +
+      '<td style="text-align: center;"><span style="font-size:26px;">PersonA</span></td>' +
+      '<td style="text-align: center;"><span style="font-size:26px;">PersonB</span></td></tr></tbody></table>' +
+      '<br/>' +
+    'These are now the people you will be making decisions for during the study, including yourself. I am now going to give you <b>' + base_endowment + 'each</b> for the two others you will be deciding for.<br />' +
+    '<br/>' +
+    '<b>This is now their money!</b> If they do well in the study today based on your decisions, we&rsquo;ll add to that and pay them more (again, potentially double).' + 
+    'If they do poorly based on your decisions, they will have to give me some of that back, but for all intents and purposes that is now their money.<br/>&nbsp;'
+    },
+    choices: " "
+      }
     ]
   }
 
@@ -397,7 +435,7 @@
 
 
 
-    timeline.push(consent, get_id, survey_instructions, decoy_database);
+    timeline.push(consent, get_id, survey_instructions, decoy_database, money_distribution);
 
     for (let i = 0; i < 4; i++) {
       timeline.push(createSELFtrials());
