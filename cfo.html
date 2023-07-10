@@ -80,7 +80,7 @@
       }
     });
 
-    var base_endowment = '$' + '5'
+    var base_endowment = '$' + '3'
 
     var s_index = 0
     var s_reversecodes = []
@@ -248,6 +248,7 @@
         return `This is a group of participants that chose to opt-in from our previous group of respondents. 
           We will select&nbsp;<strong>two</strong>&nbsp;of them via a random number generator for you to make decisions for, 
           and you will be managing their endowments on their behalf.<br>` + 
+          '<p><b> Please press the space bar to advance.</b></p>' +
         '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
         '<tbody><tr><td style="text-align: center;">' + randomized_fakes[0] + '</td>' +
         '<td style="text-align: center;">' + 'placeholder for personA' + '</td>' +
@@ -290,11 +291,21 @@
 
   money_array = [
   'img/Null_Lures/dollar_bill.jpg',
-  'img/Null_Lures/self_image.png'
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/self_image.png',
+  "img/Null_Lures/image.png", // placeholder for personA
+  "img/Null_Lures/image_2.png" //placeholder for personB
   ]
 
   locations = [
-    
+
   ]
 
   var money_distribution = {
@@ -309,7 +320,9 @@
         '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td></tr>' +
         '<tr>' +
         '<td style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 250px; height: 250px;" /></td>' +
+        //image.png is a placeholder for person A
       '<td style="text-align: center;"><img src="img/Null_Lures/image.png" style="width: 250px; height: 250px;" /></td>' +
+      //image_2.png is a placehoder for person B
       '<td style="text-align: center;"><img src="img/Null_Lures/image_2.png" style="width: 250px; height: 250px;" /></td></tr>' +
       '<tr>' +
       '<td style="text-align: center;"><span style="font-size:26px;">You</span></td>' +
@@ -319,11 +332,13 @@
     'These are now the people you will be making decisions for during the study, including yourself. I am now going to give you <b>' + base_endowment + ' each</b> for the two others you will be deciding for.<br />' +
     '<br/>' +
     '<b>This is now their money!</b> If they do well in the study today based on your decisions, we&rsquo;ll add to that and pay them more (again, potentially double).' + 
-    'If they do poorly based on your decisions, they will have to give me some of that back, but for all intents and purposes that is now their money.<br/>&nbsp;'
+    'If they do poorly based on your decisions, they will have to give me some of that back, but for all intents and purposes that is now their money.<br/>&nbsp;' +
+    '<p><b> Please press the space bar to advance.</b></p>'
     },
     choices: " "
     },
     
+    // need to find a way to make it so they do not just put the money in randomly
     {
     type: jsPsychFreeSort,
     stimuli: money_array,
@@ -333,7 +348,32 @@
     sort_area_width: 500,
     sort_area_height: 500,
     locations: locations,
-    prompt: "Please distribute the $1 bills into each person's digital wallet according to their endowments. Press the space bar when you are finished."
+    prompt: "<p>Please distribute the $1 bills to each person <b>according to their endowments</b>.</p>" +
+    "<p> Pair each person with the appropriate amount of money inside the highlighted box and press continue when finished.</p><br></br> "
+    },
+
+    {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return "I’ve put your " + base_endowment + " in your digital wallet and put " + base_endowment + " into Person A and B's digital wallets." +
+        '<p><b> Please press the space bar to advance.</b></p>' +
+        '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
+        '<tbody><tr>' +
+        '<td style="text-align: center;"><img src="img/Null_Lures/dollar_wallet.png" style="width: 250px; height: 250px;" /></td>' +
+        '<td style="text-align: center;"><img src="img/Null_Lures/dollar_wallet.png" style="width: 250px; height: 250px;" /></td>' +
+        '<td style="text-align: center;"><img src="img/Null_Lures/dollar_wallet.png" style="width: 250px; height: 250px;" /></td>' +
+        '<tr>' +
+        '<td style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 250px; height: 250px;" /></td>' +
+        //image.png is a placeholder for person A
+        '<td style="text-align: center;"><img src="img/Null_Lures/image.png" style="width: 250px; height: 250px;" /></td>' +
+          //image_2.png is a placeholder for person B
+        '<td style="text-align: center;"><img src="img/Null_Lures/image_2.png" style="width: 250px; height: 250px;" /></td></tr>' +
+        '<tr>' +
+        '<td style="text-align: center;"><span style="font-size:26px;">You</span></td>' +
+        '<td style="text-align: center;"><span style="font-size:26px;">Person A</span></td>' +
+        '<td style="text-align: center;"><span style="font-size:26px;">Person B</span></td></tr></tbody></table>'
+      },
+      choices: " "
     }
     ]
   }
