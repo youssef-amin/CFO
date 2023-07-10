@@ -55,6 +55,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-free-sort@1.0.2"></script>
     <!--This loads in the plugin that preloads your images for your participant-->
     <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
     <style>
@@ -278,19 +279,28 @@
     },
 
     {
-    type: jsPsychImageButtonResponse,
-    stimulus: 'img/Null_Lures/loading_gif.gif',
+    type: jsPsychHtmlButtonResponse,
+    stimulus: '<img src = img/Null_Lures/loading_gif.gif>',
     prompt: 'Please wait while we select faces from our database',
-    trial_duration: 5000,
-    choices: []
+    trial_duration: 2000,
+    choices: [] 
     }
     ]
   }
 
+  money_array = [
+  'img/Null_Lures/dollar_bill.jpg',
+  'img/Null_Lures/self_image.png'
+  ]
+
+  locations = [
+    
+  ]
+
   var money_distribution = {
     timeline: [
       {
-      type: jsPsychImageKeyboardResponse,
+      type: jsPsychHtmlKeyboardResponse,
       stimulus: function(){
         return '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
         '<tbody><tr>' +
@@ -298,22 +308,33 @@
         '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td>' +
         '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td></tr>' +
         '<tr>' +
-        '<SELF></SELF>' +
-      '<td style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 190px; height: 190px;" />&nbsp; &nbsp; &nbsp;</td>' +
-      '<td style="text-align: center;"><img src="personA placeholder" style="width: 250px; height: 250px;" /></td>' +
-      '<td style="text-align: center;"><img src="personB placeholder" style="width: 250px; height: 250px;" /></td></tr>' +
-      '<tr>'
+        '<td style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 250px; height: 250px;" /></td>' +
+      '<td style="text-align: center;"><img src="img/Null_Lures/image.png" style="width: 250px; height: 250px;" /></td>' +
+      '<td style="text-align: center;"><img src="img/Null_Lures/image_2.png" style="width: 250px; height: 250px;" /></td></tr>' +
+      '<tr>' +
       '<td style="text-align: center;"><span style="font-size:26px;">You</span></td>' +
-      '<td style="text-align: center;"><span style="font-size:26px;">PersonA</span></td>' +
-      '<td style="text-align: center;"><span style="font-size:26px;">PersonB</span></td></tr></tbody></table>' +
+      '<td style="text-align: center;"><span style="font-size:26px;">Person A</span></td>' +
+      '<td style="text-align: center;"><span style="font-size:26px;">Person B</span></td></tr></tbody></table>' +
       '<br/>' +
-    'These are now the people you will be making decisions for during the study, including yourself. I am now going to give you <b>' + base_endowment + 'each</b> for the two others you will be deciding for.<br />' +
+    'These are now the people you will be making decisions for during the study, including yourself. I am now going to give you <b>' + base_endowment + ' each</b> for the two others you will be deciding for.<br />' +
     '<br/>' +
     '<b>This is now their money!</b> If they do well in the study today based on your decisions, we&rsquo;ll add to that and pay them more (again, potentially double).' + 
     'If they do poorly based on your decisions, they will have to give me some of that back, but for all intents and purposes that is now their money.<br/>&nbsp;'
     },
     choices: " "
-      }
+    },
+    
+    {
+    type: jsPsychFreeSort,
+    stimuli: money_array,
+    stim_width: 80,
+    stim_height: 60,
+    sort_area_shape: 'square',
+    sort_area_width: 500,
+    sort_area_height: 500,
+    locations: locations,
+    prompt: "Please distribute the $1 bills into each person's digital wallet according to their endowments. Press the space bar when you are finished."
+    }
     ]
   }
 
