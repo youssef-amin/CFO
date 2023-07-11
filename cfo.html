@@ -502,6 +502,19 @@
         '<p>Every trial in the experiment has an equal chance of being the one choice that counts toward your payment and the payments to the others. It is important that you understand this. </p>'
       },
       choices: " "
+    },
+    {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return `<p>Just to summarize, upon completion of the study:</p> <ul><li>You will be paid a flat $${fee}` + ' participation fee + the ' + base_endowment +
+        ` adjusted for your randomly selected trial; The people you made choices for will also be paid a flat $${fee} participation fee + the ` + base_endowment + 
+        ' adjusted for their randomly selected trial.</li> <li>If your choice in the randomly selected trial was the certain amount, the experimenter will give you ' +
+        "the others that amount of money.</li> <li>If your choice was the gamble, you or the others receive the outcome of the gamble (win or loss) as determined by the computer's coin flip.</li></ul>" +
+        '<p>You will now see some examples of the trials.</p>' +
+        '<p><b> Please press the space bar to advance.</b></p>'
+ 
+      },
+      choices: " "
     }
     ]
    }
