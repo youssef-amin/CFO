@@ -139,21 +139,83 @@
     fee = 3
     var timeline = [];
 
+    var black_array = [
+    '<img src = "img/Black_Targets/CFD-BM-005-003-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-021-021-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-025-035-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-029-024-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-033-003-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-034-031-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-039-029-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-200-046-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-205-001-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-210-148-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-216-088-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-223-171-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-225-154-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-229-209-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-233-285-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-236-248-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-240-207-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-241-235-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/Black_Targets/CFD-BM-251-013-N.jpg" style = "width: 250px; height: 250px;">',
+    ]
+
+    var white_array = [
+    '<img src = "img/White_Targets/CFD-WM-003-002-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-004-010-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-016-001-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-017-002-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-020-001-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-026-001-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-033-025-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-038-003-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-200-034-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-203-023-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-204-031-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-214-026-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-224-197-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-225-127-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-234-118-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-239-128-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-241-072-N.jpg" style = "width: 250px; height: 250px;">',
+    '<img src = "img/White_Targets/CFD-WM-249-239-N.jpg" style = "width: 250px; height: 250px;">',
+    ]
     var fake_face_array = [
-      '<img src = "img/Null_Lures/CFD-AF-216-106-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-AF-222-134-N.jpg" style = "width: 200px; height: 200px;">' ,
-      '<img src = "img/Null_Lures/CFD-AM-234-355-N.jpg" style = "width: 200px; height: 200px;">' ,
-      '<img src = "img/Null_Lures/CFD-BF-207-004-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-BM-218-132-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-BM-249-235-N.jpg" style = "width: 200px; height: 200px;">', 
-      '<img src = "img/Null_Lures/CFD-LF-202-065-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image.png" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image_2.png" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image_3.png" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image_4.png" style = "width: 200px; height: 200px;">'
+      '<img src = "img/Null_Lures/CFD-AF-216-106-N.jpg" style = "width: 250px; height: 250px;">',
+      '<img src = "img/Null_Lures/CFD-AF-222-134-N.jpg" style = "width: 250px; height: 250px;">' ,
+      '<img src = "img/Null_Lures/CFD-AM-234-355-N.jpg" style = "width: 250px; height: 250px;">' ,
+      '<img src = "img/Null_Lures/CFD-BF-207-004-N.jpg" style = "width: 250px; height: 250px;">',
+      '<img src = "img/Null_Lures/CFD-BM-218-132-N.jpg" style = "width: 250px; height: 250px;">',
+      '<img src = "img/Null_Lures/CFD-BM-249-235-N.jpg" style = "width: 250px; height: 250px;">', 
+      '<img src = "img/Null_Lures/CFD-LF-202-065-N.jpg" style = "width: 250px; height: 250px;">',
+      '<img src = "img/Null_Lures/image.png" style = "width: 250px; height: 250px;">',
+      '<img src = "img/Null_Lures/image_2.png" style = "width: 250px; height: 250px;">',
+      '<img src = "img/Null_Lures/image_3.png" style = "width: 250px; height: 250px;">',
+      '<img src = "img/Null_Lures/image_4.png" style = "width: 250px; height: 250px;">'
     ]
     var randomized_fakes = jsPsych.randomization.repeat(fake_face_array, 1)
-    console.log(randomized_fakes)
+
+    var white_random_array = jsPsych.randomization.repeat(white_array, 1)
+    var black_random_array = jsPsych.randomization.repeat(black_array, 1)
+
+    var white_random = white_random_array[0]
+    var black_random = black_random_array[0]
+
+    var person_combined = [white_random, black_random]
+    var random_person_choice = jsPsych.randomization.repeat(person_combined, 1)
+
+    var person_a = random_person_choice[0]
+    var person_b = random_person_choice[1]
+
+    function freesort_func(person){
+      string1 = person.slice(person.indexOf('"') + 1, person.length);
+      string2 = string1.slice(0,string1.indexOf('"'));
+      return string2;
+    }
+
+    var freesort_a = freesort_func(person_a)
+    var freesort_b = freesort_func(person_b)
 
     var prolific_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
     jsPsych.data.addProperties({
@@ -251,28 +313,28 @@
           '<p><b> Please press the space bar to advance.</b></p>' +
         '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
         '<tbody><tr><td style="text-align: center;">' + randomized_fakes[0] + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for personA' + '</td>' +
+        '<td style="text-align: center;">' + person_a + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[1] + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[2] + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for white array' + '</td><br></br>' +
+        '<td style="text-align: center;">' + white_random_array[0] + '</td><br></br>' +
         '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
-        '<tbody><tr><td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
+        '<tbody><tr><td style="text-align: center;">' + white_random_array[1] + '</td>' +
+        '<td style="text-align: center;">' + white_random_array[2] + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[4] + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[5] + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for personB' + '</td><br></br>' + 
+        '<td style="text-align: center;">' + person_b + '</td><br></br>' + 
         '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
         '<tbody><tr><td style="text-align: center;">' + randomized_fakes[6] + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
+        '<td style="text-align: center;">' + white_random_array[3] + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[7] + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[8] + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for white array' + '</td><br></br>' +
+        '<td style="text-align: center;">' + white_random_array[4] + '</td><br></br>' +
         '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
         '<tbody><tr><td style="text-align: center;">' + randomized_fakes[9] + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[10] + '</td>' +
         '<td style="text-align: center;">' + randomized_fakes[3] + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
-        '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
+        '<td style="text-align: center;">' + white_random_array[5] + '</td>' +
+        '<td style="text-align: center;">' + white_random_array[6] + '</td>' +
         '</tr></tbody></table>' 
       }
     ,
@@ -300,13 +362,10 @@
   'img/Null_Lures/dollar_bill.jpg',
   'img/Null_Lures/dollar_bill.jpg',
   'img/Null_Lures/self_image.png',
-  "img/Null_Lures/image.png", // placeholder for personA
-  "img/Null_Lures/image_2.png" //placeholder for personB
+  freesort_a, 
+  freesort_b
   ]
 
-  locations = [
-
-  ]
 
   var money_distribution = {
     timeline: [
@@ -320,10 +379,8 @@
         '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td></tr>' +
         '<tr>' +
         '<td style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 250px; height: 250px;" /></td>' +
-        //image.png is a placeholder for person A
-      '<td style="text-align: center;"><img src="img/Null_Lures/image.png" style="width: 250px; height: 250px;" /></td>' +
-      //image_2.png is a placehoder for person B
-      '<td style="text-align: center;"><img src="img/Null_Lures/image_2.png" style="width: 250px; height: 250px;" /></td></tr>' +
+      '<td style="text-align: center;">' + person_a + '</td>' +
+      '<td style="text-align: center;">' + person_b + '</td></tr>' +
       '<tr>' +
       '<td style="text-align: center;"><span style="font-size:26px;">You</span></td>' +
       '<td style="text-align: center;"><span style="font-size:26px;">Person A</span></td>' +
@@ -339,7 +396,7 @@
     },
     
     // need to find a way to make it so they do not just put the money in randomly
-    {
+  {
     type: jsPsychFreeSort,
     stimuli: money_array,
     stim_width: 80,
@@ -347,7 +404,6 @@
     sort_area_shape: 'square',
     sort_area_width: 500,
     sort_area_height: 500,
-    locations: locations,
     prompt: "<p>Please distribute the $1 bills to each person <b>according to their endowments</b>.</p>" +
     "<p> Pair each person with the appropriate amount of money inside the highlighted box and press continue when finished.</p><br></br> "
     },
@@ -364,10 +420,8 @@
         '<td style="text-align: center;"><img src="img/Null_Lures/dollar_wallet.png" style="width: 250px; height: 250px;" /></td>' +
         '<tr>' +
         '<td style="text-align: center;"><img src="https://cornell.ca1.qualtrics.com/CP/Graphic.php?IM=IM_blOXRO3gUaBskQe" style="width: 250px; height: 250px;" /></td>' +
-        //image.png is a placeholder for person A
-        '<td style="text-align: center;"><img src="img/Null_Lures/image.png" style="width: 250px; height: 250px;" /></td>' +
-          //image_2.png is a placeholder for person B
-        '<td style="text-align: center;"><img src="img/Null_Lures/image_2.png" style="width: 250px; height: 250px;" /></td></tr>' +
+        '<td style="text-align: center;">' + person_a + '</td>' +
+        '<td style="text-align: center;">' + person_b + '</td></tr>' +
         '<tr>' +
         '<td style="text-align: center;"><span style="font-size:26px;">You</span></td>' +
         '<td style="text-align: center;"><span style="font-size:26px;">Person A</span></td>' +
@@ -378,6 +432,79 @@
     ]
   }
 
+   var about = {
+    timeline: [
+      {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<p>Today you will make choices between certain amounts of money and gambles - for yourself and for others. 
+        The choices you make for yourself will not affect the others' outcomes, 
+        nor will the choices you make for the others affect your outcome.</p>
+        <p><b> Please press the space bar to advance.</b></p>`,
+        choices: " "
+      },
+
+      {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: function(){
+        return '<h1> Payment </h1>' + 
+        `<p>Flat participant fee of $${fee} + upon completion of the task, without exception.
+        This amount will not be influenced by your choices and you will be paid this amount upon completion of the experiment 
+        regardless of your choices.</p>` +
+          '<p> In addition to the participant fee, recall we have just given you ' + base_endowment + ', and it is now your money.' +
+          ' You will be risking your ' + base_endowment + ' in the monetary decisions you make for yourself. We also gave you ' + base_endowment + 
+          ' for each of the others you will be making decisions for, and this is now their money. You will be risking their ' + base_endowment + ' in the monetary decisions you make for them. </p>' +
+          '<p>If you win money based on your choices, we will give you more money (up to ' + base_endowment + 'extra).' +
+          ' If you lose money based on your choices, we will take it out of your payment (up to ' + base_endowment + ', the same amount you have just been given).</p>' +
+          '<p>If you win money for the others, the experimenter will give them more money (up to ' + base_endowment + ' extra for each of them) and you lose money for the others, ' +
+          'we will take it out of their payment (up to ' + base_endowment + ', the same amount you were just given for them).</p>' +
+          '<p><b> Please press the space bar to advance.</b></p>'
+      },
+      choices: " "
+    },
+    {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return ` <p> You will make decisions in three separate sessions - one for yourself, and one for each of the two others. 
+          Each session will consist of 90 trials. In each trial, you will be presented with two options: 
+          one a certain amount of money and the other a gamble. </p>` +
+          `<p> Take as much time as you need to make your choices. </p>` +
+          `<p> Each choice will be immediately followed by its outcome. If you took the gamble, the computer will flip a coin, and will show you the amount you won or lost. 
+            If you took the guaranteed amount, then you'll be shown that amount again. </p>` + 
+            `<p>Each choice session will be separated into three smaller blocks of 30 choices. You can take a brief break between blocks if you'd like. </p>` +
+            '<p><b> Please press the space bar to advance.</b></p>'
+      },
+      choices: " "
+    },
+
+    {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return `<p> When the task is complete, we will select 1 trial at random from all of your trials today and pay you the actual value of that randomly selected trial. 
+        We will also pick one trial at random from all your trials for Person A, and one trial from all your trials for Person B, and pay them the actual value of those 
+        randomly selected trials. </p>` + 
+        `<p><b> You CANNOT CHANGE the choice you made. Since you do not know in advance which trial will count, you should treat every trial as if it is your only trial. </b></p>` +
+        '<p><b> Please press the space bar to advance.</b></p>'
+      },
+      choices: " "
+    },
+    {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return '<p>The computer program uses a random number generator to pick the trials. Again, this is your own money that you will be winning and losing. For the one trial picked for you: </p>' +
+        '<ul><li>If you accepted the gamble and won, we will add that money to your ' + base_endowment + '</li>' +
+        '<li>If you accepted the gamble and lost, we will take that money from your ' + base_endowment + '</li>' +
+        '<li>If you rejected the gamble, we will adjust your ' + base_endowment + ' by the guaranteed alternative</li></ul>'  +
+        '<p> The program will also select one trial at random for each of the others you made decisions for, and pay those people the actual value of that randomly selected trial.' +
+        'Again, this is their own money that you will be winning and losing for them. For the one trial picked for each of them: </p>' +
+        '<ul><li>If you accepted the gamble and won, we will add that money to their ' + base_endowment + '</li>' +
+        '<li>If you accepted the gamble and lost, we will take that money from their ' + base_endowment + '</li>' +
+        '<li>If you rejected the gamble, we will adjust their ' + base_endowment + ' by the guaranteed alternative</li></ul>'  + 
+        '<p>Every trial in the experiment has an equal chance of being the one choice that counts toward your payment and the payments to the others. It is important that you understand this. </p>'
+      },
+      choices: " "
+    }
+    ]
+   }
     const circles = {
       guar: `    
       <guar></guar><div style="flex: 1; text-align: center;">
@@ -496,7 +623,7 @@
 
 
 
-    timeline.push(consent, get_id, survey_instructions, decoy_database, money_distribution);
+    timeline.push(about, consent, get_id, survey_instructions, decoy_database, money_distribution);
 
     for (let i = 0; i < 4; i++) {
       timeline.push(createSELFtrials());
