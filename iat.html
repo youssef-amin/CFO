@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script> <!--This loads in the plugin that preloads your images for your participant-->
     <script src="https://unpkg.com/@jspsych/plugin-iat-image@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-iat-html@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey@0.2.1"></script>
     <link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@0.1.1/css/survey.css">
     <link href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css" rel="stylesheet" type="text/css" />
 </head>
@@ -520,11 +521,380 @@ random_array = [
 
 active_iat_block = random_array[Math.floor(Math.random() * random_array.length)]
 
-data = []
+var finished_study = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function(){
+    return `<p>Thank you! You've finished the main task of the study. There are a few short measures and questionnaires left for you to complete.</p>` +
+    '<p><b> Please press the space bar to continue to the final portion of the study.</b></p>'
+  },
+  choices: " "
+}
+
+var pp_info = {
+  timeline: [
+
+  {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function() {
+      return `<h2><u> Demographics</u> </h2><p> Please continue when you are ready to provide demographic information</p>
+      <p><b> Please press the space bar to advance</b></p>`
+    },
+    choices: " "
+  },
+
+  {
+    type: jsPsychSurvey,
+    pages: [
+      //page 1, general info
+    [
+      {
+        type: 'text',
+        input_type: "number",
+        prompt: 'What is your age?',
+        required: true,
+        name: 'age'
+      },
+
+      {
+        type: 'text',
+        input_type: 'text',
+        prompt: 'What is your gender?',
+        required: true,
+        name: 'gender'
+      },
+
+      {
+        type: 'text',
+        input_type: 'text',
+        prompt: 'What is your occupation/major?',
+        required: true,
+        name: 'occupation'
+      },
+
+      {
+        type: 'text',
+        input_type: 'text',
+        prompt: 'What is your ethnicity?',
+        required: true,
+        name: 'ethnicity'
+      },
+
+      {
+        type: 'multi-choice',
+        prompt: 'What is the highest level of education completed?',
+        options: ['Less than High School', 'High School / GED', 'Some College', '2-year College Degree', 
+        '4-year College Degree', 'Masters Degree', 'Doctoral Degree', 'Professional Degree (JD, MD)' ],
+        required: true,
+        name: 'education'
+      },
+
+      {
+        type: 'multi-choice',
+        prompt: 'What is your combined annual household income?',
+        options: ['Less than $30,000', '$30,000 - $39,999', '$40,000 - $49,999', '$50,000 - $59,999', '$60,000 - $69,999',
+        '$70,000 - $79,999', '$80,000 - $89,999', '$90,000 - $99,999', '$100,000 or more'],
+        required: true,
+        name: 'income'
+      }
+    ],
+
+    //page 2, poli orientation
+    [
+      {
+        type: 'likert',
+        prompt: 'Where on the following political orientation would you place yourself?',
+        likert_scale_min_label: 'Extremely Liberal',
+        likert_scale_max_label: 'Extremely Conservative',
+        likert_scale_min: 1,
+        likert_scale_max: 9,
+        name: 'poli_orientation',
+        required: true
+      },
+      
+      {
+      type: 'likert',
+      prompt: 'In terms of social and cultural issues, how liberal or conservative are you?',
+      likert_scale_min_label: 'Extremely Liberal',
+      likert_scale_max_label: 'Extremely Conservative',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'poli_cultural_orientation',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'In terms of economic issues, how liberal or conservative are you?',
+      likert_scale_min_label: 'Extremely Liberal',
+      likert_scale_max_label: 'Extremely Conservative',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'poli_econ_orientation',
+      required: true
+      },
+    ],
+    ]
+  },
+
+  {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function() {
+      return `<h2><u> Questionnaire</u> </h2><p> Please continue when you are ready to complete a brief questionnaire</p>
+      <p><b> Please press the space bar to advance</b></p>`
+    },
+    choices: " "
+  },
+
+  {
+    type:jsPsychSurvey,
+    pages: [
+      //page 1, excitement for winning
+      [
+      {
+      type: 'likert',
+      prompt: 'How excited were you to win money for yourself?',
+      likert_scale_min_label: 'Not at all',
+      likert_scale_max_label: 'Extremely',
+      likert_scale_min: 1,
+      likert_scale_max: 7,
+      name: 'self_excitement',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'How excited were you to win money for Person A',
+      likert_scale_min_label: 'Not at all',
+      likert_scale_max_label: 'Extremely',
+      likert_scale_min: 1,
+      likert_scale_max: 7,
+      name: 'person_a_excitement',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'How excited were you to win money for Person B?',
+      likert_scale_min_label: 'Not at all',
+      likert_scale_max_label: 'Extremely',
+      likert_scale_min: 1,
+      likert_scale_max: 7,
+      name: 'person_b_excitement',
+      required: true
+      }
+      ],
+      
+      //page 2, disappointment for losing
+      [
+      {
+      type: 'likert',
+      prompt: 'How disappointed were you to lose money for yourself?',
+      likert_scale_min_label: 'Not at all',
+      likert_scale_max_label: 'Extremely',
+      likert_scale_min: 1,
+      likert_scale_max: 7,
+      name: 'self_disappointment',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'How disappointed were you to lose money for Person A',
+      likert_scale_min_label: 'Not at all',
+      likert_scale_max_label: 'Extremely',
+      likert_scale_min: 1,
+      likert_scale_max: 7,
+      name: 'person_a_disappointment',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'How disappointed were you to lose money for yourself?',
+      likert_scale_min_label: 'Not at all',
+      likert_scale_max_label: 'Extremely',
+      likert_scale_min: 1,
+      likert_scale_max: 7,
+      name: 'person_b_disappointment',
+      required: true
+      }
+      ],
+
+      //page 3, trait scaling - A
+      [
+
+      {
+      type: 'html',
+      prompt: '<p>How would you rate <b>Person A</b> on a scale from...</p><img src = person_a placeholder>'
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Reckless to Cautious',
+      likert_scale_min_label: 'Reckless',
+      likert_scale_max_label: 'Cautious',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'reckless_cautious_a',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Irresponsible to Responsible',
+      likert_scale_min_label: 'Irresponsible',
+      likert_scale_max_label: 'Responsible',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'irresponsible_responsible_a',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Careless to Careful',
+      likert_scale_min_label: 'Careless',
+      likert_scale_max_label: 'Careful',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'careless_careful_a',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Thoughtless to Thoughtful',
+      likert_scale_min_label: 'Thoughtless',
+      likert_scale_max_label: 'Thoughtful',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'thoughtless_thoughtful_a',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Inconsiderate to Considerate',
+      likert_scale_min_label: 'Inconsiderate',
+      likert_scale_max_label: 'Considerate',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'inconsiderate_considerate_a',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Imprudent to Prudent',
+      likert_scale_min_label: 'Imprudent',
+      likert_scale_max_label: 'Prudent',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'imprudent_prudent_a',
+      required: true
+      }
+      ],
+
+      //page 4, trait scaling - B
+      [
+      {
+      type: 'html',
+      prompt: '<p>How would you rate <b>Person B</b> on a scale from...</p><img src = person_b placeholder>'
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Inconsiderate to Considerate',
+      likert_scale_min_label: 'Inconsiderate',
+      likert_scale_max_label: 'Considerate',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'inconsiderate_considerate_b',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Reckless to Cautious',
+      likert_scale_min_label: 'Reckless',
+      likert_scale_max_label: 'Cautious',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'reckless_cautious_b',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Imprudent to Prudent',
+      likert_scale_min_label: 'Imprudent',
+      likert_scale_max_label: 'Prudent',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'imprudent_prudent_b',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Thoughtless to Thoughtful',
+      likert_scale_min_label: 'Thoughtless',
+      likert_scale_max_label: 'Thoughtful',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'thoughtless_thoughtful_b',
+      required: true
+      },
+
+      {
+      type: 'likert',
+      prompt: 'Careless to Careful',
+      likert_scale_min_label: 'Careless',
+      likert_scale_max_label: 'Careful',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'careless_careful_b',
+      required: true
+      },
+    
+      {
+      type: 'likert',
+      prompt: 'Irresponsible to Responsible',
+      likert_scale_min_label: 'Irresponsible',
+      likert_scale_max_label: 'Responsible',
+      likert_scale_min: 1,
+      likert_scale_max: 9,
+      name: 'irresponsible_responsible_b',
+      required: true
+      }
+      ]
+    ]
+  }
+
+  ]
+}
+
+var debrief = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function(){
+    return `<p> Thank you for completing all the tasks!</p><p>This study is about how people make 
+    financial decisions for people of different races. To study this, we used slight deception: 
+    the people you saw were not actual participants in this study, and therefore will not be receiving money from the random
+    trials chosen as stated earlier. This also means that there will be no option to opt-in for a follow-up study for additional payment 
+    as the people you saw were not real participants.</p>` +
+    '<p>You will receive a payment of $${e://Field/selfEndowment} as per the random trial from <b>your</b> block, plus your per hour participation fee.</p>' +
+    '<p> Please continue forward to complete the study and earn credit on Prolific</p><br></br>' +
+    '<p><b> Please press the space bar to advance</b></p>'
+  },
+  choices: " "
+}
+timeline.push(finished_study)
 
 for (i = 0; i < active_iat_block.length; i++) {
   timeline.push(active_iat_block[i]);
 };
+
+timeline.push(pp_info, debrief)
 
 jsPsych.run(timeline);
 
