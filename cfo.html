@@ -259,7 +259,13 @@
       '<img src = "img/Null_Lures/image.png"            style = "width: 200px; height: 200px;">',
       '<img src = "img/Null_Lures/image_2.png"          style = "width: 200px; height: 200px;">',
       '<img src = "img/Null_Lures/image_3.png"          style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image_4.png"          style = "width: 200px; height: 200px;">'
+      '<img src = "img/Null_Lures/image_4.png"          style = "width: 200px; height: 200px;">',
+      '<img src = "img/White_Targets/CFD-WM-003-002-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = "img/White_Targets/CFD-WM-004-010-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = "img/White_Targets/CFD-WM-016-001-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = "img/White_Targets/CFD-WM-017-002-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = "img/White_Targets/CFD-WM-020-001-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = "img/White_Targets/CFD-WM-026-001-N.jpg" style = "width: 200px; height: 200px;">',
     ]
     var randomized_fakes = jsPsych.randomization.repeat(fake_face_array, 1)
     console.log(randomized_fakes)
@@ -330,7 +336,7 @@
     <br><div style="text-align: center;"><img src=${selfFace} style="width: 275px; height: 275px;"></div>
     <div>&nbsp;</div>
     <div style="text-align: center;"><strong>You</strong></div><div style="text-align: center;"><strong><br></strong></div>` +
-              '<p> This is a study about monetary decision-making, so to start things off, we have just endowed you with ' + base_endowment + '</p>' +
+              '<p> This is a study about monetary decision-making, so to start things off, we have just endowed you with ' + `$${fee}` + '</p>' +
               '<p> This is now your money! If you do well in the study today, we will just add to that, and pay you more (potentially twice that). ' +
               'If you do poorly, you will have to give me some of that back, but for all intents and purposes, that is now your money. </p>' +
               '<p><b> Please press the space bar to advance.</b></p>'
@@ -360,28 +366,28 @@
           and you will be managing their endowments on their behalf.<br>` +
               '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
               '<tbody><tr><td style="text-align: center;">' + randomized_fakes[0] + '</td>' +
-              '<td style="text-align: center;">' + 'placeholder for personA' + '</td>' +
+              `<td style="text-align: center;"><img src = ${blackFace} style = "width: 200px; height: 200px;"></td>` +
               '<td style="text-align: center;">' + randomized_fakes[1] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[2] + '</td>' +
-              '<td style="text-align: center;">' + 'placeholder for white array' + '</td><br></br>' +
+              '<td style="text-align: center;">' + randomized_fakes[3] + '</td><br></br>' +
               '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
-              '<tbody><tr><td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
-              '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
+              '<tbody><tr><td style="text-align: center;">' + randomized_fakes[16] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[4] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[5] + '</td>' +
-              '<td style="text-align: center;">' + 'placeholder for personB' + '</td><br></br>' +
+              '<td style="text-align: center;">' + randomized_fakes[6] + '</td>' +
+              `<td style="text-align: center;"><img src = ${whiteFace} style = "width: 200px; height: 200px;"></td><br></br>` +
               '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
-              '<tbody><tr><td style="text-align: center;">' + randomized_fakes[6] + '</td>' +
-              '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
-              '<td style="text-align: center;">' + randomized_fakes[7] + '</td>' +
-              '<td style="text-align: center;">' + randomized_fakes[8] + '</td>' +
-              '<td style="text-align: center;">' + 'placeholder for white array' + '</td><br></br>' +
-              '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
-              '<tbody><tr><td style="text-align: center;">' + randomized_fakes[9] + '</td>' +
+              '<tbody><tr><td style="text-align: center;">' + randomized_fakes[7] + '</td>' +
+              '<td style="text-align: center;">' + randomized_fakes[8]+ '</td>' +
+              '<td style="text-align: center;">' + randomized_fakes[9] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[10] + '</td>' +
-              '<td style="text-align: center;">' + randomized_fakes[3] + '</td>' +
-              '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
-              '<td style="text-align: center;">' + 'placeholder for white array' + '</td>' +
+              '<td style="text-align: center;">' + randomized_fakes[11] + '</td><br></br>' +
+              '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
+              '<tbody><tr><td style="text-align: center;">' + randomized_fakes[12] + '</td>' +
+              '<td style="text-align: center;">' + randomized_fakes[13] + '</td>' +
+              '<td style="text-align: center;">' + randomized_fakes[14] + '</td>' +
+              '<td style="text-align: center;">' +  randomized_fakes[15] + '</td>' +
+              '<td style="text-align: center;">' + randomized_fakes[7] + '</td>' +
               '</tr></tbody></table>'
           }
           ,
@@ -402,27 +408,25 @@
     var money_distribution = {
       timeline: [
         {
-          type: jsPsychImageKeyboardResponse,
+          type: jsPsychHtmlKeyboardResponse,
           stimulus: function () {
-            return '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
-              '<tbody><tr>' +
-              '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td>' +
-              '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td>' +
-              '<td style="text-align: center;"><span style="font-size:26px;"><strong>' + base_endowment + '</strong></span></td></tr>' +
-              '<tr>' +
-              '<SELF></SELF>' +
-              `<td style="text-align: center;"><img src= ${selfFace}  style="width: 190px; height: 190px;" />&nbsp; &nbsp; &nbsp;</td>` +
-              '<td style="text-align: center;"><img src="personA placeholder" style="width: 250px; height: 250px;" /></td>' +
-              '<td style="text-align: center;"><img src="personB placeholder" style="width: 250px; height: 250px;" /></td></tr>' +
-              '<tr>'
-            '<td style="text-align: center;"><span style="font-size:26px;">You</span></td>' +
-              '<td style="text-align: center;"><span style="font-size:26px;">PersonA</span></td>' +
-              '<td style="text-align: center;"><span style="font-size:26px;">PersonB</span></td></tr></tbody></table>' +
-              '<br/>' +
-              'These are now the people you will be making decisions for during the study, including yourself. I am now going to give you <b>' + base_endowment + 'each</b> for the two others you will be deciding for.<br />' +
-              '<br/>' +
-              '<b>This is now their money!</b> If they do well in the study today based on your decisions, we&rsquo;ll add to that and pay them more (again, potentially double).' +
-              'If they do poorly based on your decisions, they will have to give me some of that back, but for all intents and purposes that is now their money.<br/>&nbsp;'
+            return `<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">
+              <tbody><tr>
+              <td style="text-align: center;"><span style="font-size:26px;"><strong> $${fee} </strong></span></td> 
+              <td style="text-align: center;"><span style="font-size:26px;"><strong> $${fee} </strong></span></td> 
+              <td style="text-align: center;"><span style="font-size:26px;"><strong> $${fee} </strong></span></td></tr> 
+              <tr>
+              <td style="text-align: center;"><img src= ${selfFace}  style="width: 190px; height: 190px;" /></td> 
+              <td style="text-align: center;"><img src= ${blackFace} style="width: 190px; height: 190px;" /></td> 
+              <td style="text-align: center;"><img src= ${whiteFace} style="width: 190px; height: 190px;" /></td></tr> 
+              <tr>
+              <td style="text-align: center;"><span style="font-size:26px;">You</span></td>
+              <td style="text-align: center;"><span style="font-size:26px;">${ABkey.black}</span></td>
+              <td style="text-align: center;"><span style="font-size:26px;">${ABkey.white}</span></td></tr></tbody></table>
+              <p>These are now the people you will be making decisions for during the study, including yourself. I am now going to give you <b> $${fee} each</b> for the two others you will be deciding for.</p>
+              <p><b>This is now their money!</b> If they do well in the study today based on your decisions, we&rsquo;ll add to that and pay them more (again, potentially double).
+              If they do poorly based on your decisions, they will have to give me some of that back, but for all intents and purposes that is now their money.</p><br><br/>
+              <p><b> Please press the space bar to advance.</b></p>`
           },
           choices: " "
         }
@@ -517,8 +521,7 @@
     }
 
 
-
-
+var incorrect;
     //Decision Trial Setup//
     const circles = {
       guar: `    
@@ -534,7 +537,200 @@
           </div>
       </div>`}
 
+    var secondGuar =  `<guar2></guar2><div style="flex: 1; text-align: center;">
+        <div class="guarantee" style = "margin: auto;">
+          <div id="guar2"><span style="color:#ffffff;">$</span></div>
+        </div> 
+      </div>`
+
     var guarOrGamb = [circles.guar, circles.gamble];
+
+  var examples = {
+    timeline: [
+
+    {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function(){
+      return `</div>
+    A certain amount looks like this. This option is winning $.30 for sure <br><br>
+                <div style="display: flex; justify-content: space-between;">
+                ${guarOrGamb[0]}
+    </div><br></br> 
+    <p><b> Please press the space bar to advance.</b></p>`},
+    choices: " ",
+    on_load: function () {
+          window.focus();
+          if (guarOrGamb[0] == circles.guar) {
+            s_reversecodes[s_index] = 0
+          } else {
+            s_reversecodes[s_index] = 1
+          };//whether this trial has guar on left (e) or not
+          document.getElementById("guar").innerHTML   = '+$.30'
+    }
+  },
+
+  {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function() {
+      return `</div>
+    These options are getting $0.00 for sure (LEFT), or losing $0.40 for sure (RIGHT) <br><br>
+                <div style="display: flex; justify-content: space-between;">
+                ${guarOrGamb[0]}${secondGuar}
+    </div>
+    <br></br> 
+    <p><b> Please press the space bar to advance.</b></p>`},
+    choices: " ",
+    on_load: function () {
+          window.focus();
+          if (guarOrGamb[0] == circles.guar) {
+            s_reversecodes[s_index] = 0
+          } else {
+            s_reversecodes[s_index] = 1
+          };//whether this trial has guar on left (e) or not
+          document.getElementById("guar").innerHTML   = '+$0.00';
+          document.getElementById("guar2").innerHTML   = '-$.40';
+    }
+  },
+
+  {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function() {
+      return `</div>
+    A <b> gamble option </b> looks like this. If you choose his gamble, a coin will be flipped: HEADS you win $.90 (top)
+    ; TAILS you lose $1.13 (bottom). <br><br>
+                <div style="display: flex; justify-content: space-between;">
+                ${guarOrGamb[1]}
+    </div>
+    <br></br> 
+    <p><b> Please press the space bar to advance.</b></p>`},
+    choices: " ",
+    on_load: function () {
+          window.focus();
+          if (guarOrGamb[0] == circles.guar) {
+            s_reversecodes[s_index] = 0
+          } else {
+            s_reversecodes[s_index] = 1
+          };//whether this trial has guar on left (e) or not
+          document.getElementById("field1").innerHTML = '+$.90';
+          document.getElementById("field2").innerHTML = '-$1.13';
+    }
+  },
+
+  {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function() {
+      return `</div>
+      This is what a choice looks like. Would you prefer $0.00 <b>for sure</b>, or a <b>gamble</b> with 50-50 chance of winning $.90 or losing $1.13?
+      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br>
+                <div style="display: flex; justify-content: space-between;">
+                  ${guarOrGamb[0]}${guarOrGamb[1]}
+    </div>`},
+    choices: ['e', 'i'],
+    on_load: function () {
+          window.focus();
+          if (guarOrGamb[0] == circles.guar) {
+            s_reversecodes[s_index] = 0
+          } else {
+            s_reversecodes[s_index] = 1
+          };//whether this trial has guar on left (e) or not
+          document.getElementById("guar").innerHTML = '+$0.00';
+          document.getElementById("field1").innerHTML = '+$.90';
+          document.getElementById("field2").innerHTML = '-$1.13';
+    }
+  },
+
+  {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function() {
+      return `</div>
+      Another trial might look like this. Would you prefer winning $.50 <b>for sure</b>, or taking a <b>gamble</b> with 50-50 chance of winning $.50 or receiving $0.00?
+      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br>
+                <div style="display: flex; justify-content: space-between;">
+                  ${guarOrGamb[0]}${guarOrGamb[1]}
+    </div>`},
+    choices: ['e', 'i'],
+    on_load: function () {
+          window.focus();
+          if (guarOrGamb[0] == circles.guar) {
+            s_reversecodes[s_index] = 0
+          } else {
+            s_reversecodes[s_index] = 1
+          };//whether this trial has guar on left (e) or not
+          document.getElementById("guar").innerHTML = '+$.50';
+          document.getElementById("field1").innerHTML = '+$.50';
+          document.getElementById("field2").innerHTML = '-$0.00';
+    }
+  },
+  ]
+  }
+
+  function quizfunc() {
+   var quiz ={
+     type: jsPsychHtmlKeyboardResponse,
+    stimulus: function() {
+      return `</div>
+      <h1> Quick Quiz to Ensure Understanding </h1><br></br><p> You decide to accept the gamble. Which key do you press?</p>
+      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br>
+                <div style="display: flex; justify-content: space-between;">
+                  ${guarOrGamb[0]}${guarOrGamb[1]}
+    </div>`},
+    choices: ['e', 'i'],
+    on_load: function () {
+          window.focus();
+          if (guarOrGamb[0] == circles.guar) {
+            s_reversecodes[s_index] = 0
+          } else {
+            s_reversecodes[s_index] = 1
+          };//whether this trial has guar on left (e) or not
+          document.getElementById("guar").innerHTML = '+$0.00';
+          document.getElementById("field1").innerHTML = '+$9.00';
+          document.getElementById("field2").innerHTML = '-$11.25';
+    },
+    on_finish: function (data) {
+      guarOrGamb = guarOrGamb.sort(() => Math.random() - 0.5); //at the end of each trial, position of guar or gamble is randomized
+          if (s_reversecodes[s_index - 1] == 0) {
+            switch (data.response) {
+              case 'e':
+                result = "guarantee";
+                break;
+              default:
+                result = "gamble";
+                break;
+            }
+          } else {
+            switch (data.response) {
+              case 'i':
+                result = "guarantee";
+                break;
+              default:
+                result = "gamble";
+                break;
+            }
+          }
+          data.response = result;
+          
+          var incorrect = (data.response == 'gamble') ? 0 : 1;
+          console.log(incorrect)
+
+      
+      }
+    }
+    var resultquiz = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: function () {
+          return `<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 24px;">` +
+            `You took the guaranteed amount $0.00, this is not correct</div>`
+        },
+        choices: '',
+        trial_duration: 2000
+      }
+
+      console.log(incorrect)
+      return {timeline: [quiz, resultquiz]}
+    
+  }
+
+
 
     function createSELFtrials() {
       var decisionTrial = {
@@ -866,7 +1062,8 @@
     var secondSelect = selectedTrials[blockRandomizationIndex[1]];
     var thirdSelect = selectedTrials[blockRandomizationIndex[2]];
 
-    timeline.push(consent) //, get_id, survey_instructions, decoy_database, money_distribution);
+    //timeline.push(consent, get_id, survey_instructions, decoy_database, money_distribution, about, examples, quizfunc);
+    timeline.push(quizfunc())
 
     for (let i = 0; i < trialNumber; i++) {
       timeline.push(firstBlock);
