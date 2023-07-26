@@ -725,7 +725,20 @@
         choices: '',
         trial_duration: 3000
       }
-      
+    
+    var final_instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return `<p> Ok, let's get started. </p> <p>When making decisions in today’s task, please consider each choice on its own merits. 
+        In other words, concentrate on the values in that one gamble, its possible outcomes, and the guaranteed alternative.</p> 
+        <p>When you are making decisions for yourself, ask yourself how you would feel if you won that positive amount, 
+        how you would feel if you lost that negative amount, and how you feel about the guaranteed amount.</p>
+        <p>When you are making decisions for others, ask yourself how they would feel if they won that positive amount, 
+        how they would feel if they lost that negative amount, and how they would feel about the guaranteed amount.</p>
+        <p><b>Press the space bar when you are ready to start.</b></p>`
+      }, 
+      choices: " "
+    }
     function createSELFtrials() {
       var decisionTrial = {
         type: jsPsychHtmlKeyboardResponse,
@@ -1043,6 +1056,53 @@
       choices: ''
     }
 
+    var self_Instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return `<SELF></SELF>
+    <br><div style="text-align: center;"><img src= ${selfFace}  style="width: 500; height: 351px;"></div>
+    <div>&nbsp;</div>
+    <div style="text-align: center;"><strong>You</strong></div><div style="text-align: center;"><strong><br></strong></div>
+    <p>In this block of trials, you will be making financial decisions for yourself.</p>
+    <p>When you make these decisions, please remember to ask yourself how you would feel if you won that positive amount, 
+      how you would feel if you lost that negative amount, and how you would feel about the guaranteed amount.</p>
+    <p>When the block is complete, we will pick 1 trial at random and pay you the actual value of that randomly selected trial. </p>
+    <b><p>Please press the space bar to continue.</p></b>`
+      },
+      choices: " "
+    };
+
+    var black_Instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return `<BLACK></BLACK>
+    <br><div style="text-align: center;"><img src= ${blackFace}  style="width: 500; height: 351px;"></div>
+    <div>&nbsp;</div>
+    <div style="text-align: center;"><strong>${ABkey.black}</strong></div><div style="text-align: center;"><strong><br></strong></div>
+    <p>In this block of trials, you will be making financial decisions for ${ABkey.black}.</p>
+    <p>When you make these decisions, please remember to ask yourself how ${ABkey.black} would feel if they won that positive amount, 
+      how ${ABkey.black} would feel if you lost that negative amount, and how ${ABkey.black} would feel about the guaranteed amount.</p>
+    <p>When the block is complete, we will pick 1 trial at random and pay ${ABkey.black} the actual value of that randomly selected trial. </p>
+    <b><p>Please press the space bar to continue.</p></b>`
+      },
+      choices: " "
+    };
+
+    var white_Instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: function(){
+        return `<WHITE></WHITE>
+    <br><div style="text-align: center;"><img src= ${whiteFace}  style="width: 500; height: 351px;"></div>
+    <div>&nbsp;</div>
+    <div style="text-align: center;"><strong>${ABkey.white}</strong></div><div style="text-align: center;"><strong><br></strong></div>
+    <p>In this block of trials, you will be making financial decisions for ${ABkey.white}.</p>
+    <p>When you make these decisions, please remember to ask yourself how ${ABkey.white} would feel if they won that positive amount, 
+      how ${ABkey.white} would feel if you lost that negative amount, and how ${ABkey.white} would feel about the guaranteed amount.</p>
+    <p>When the block is complete, we will pick 1 trial at random and pay ${ABkey.white} the actual value of that randomly selected trial. </p>
+    <b><p>Please press the space bar to continue.</p></b>`
+      },
+      choices: " "
+    };
 
     blockRandomizationIndex = jsPsych.randomization.repeat([0, 1, 2], 1)
 
@@ -1056,22 +1116,29 @@
     var secondSelect = selectedTrials[blockRandomizationIndex[1]];
     var thirdSelect = selectedTrials[blockRandomizationIndex[2]];
 
-    //timeline.push(consent, get_id, survey_instructions, decoy_database, money_distribution, about, examples, quizfunc);
-    timeline.push(quiz, incorrect_response_prompt);
+    var pretrial_instructions = [self_Instructions, black_Instructions, white_Instructions];
+    var firstInstruc = pretrial_instructions[blockRandomizationIndex[0]];
+    var secondInstruc = pretrial_instructions[blockRandomizationIndex[1]];
+    var thirdInstruc = pretrial_instructions[blockRandomizationIndex[2]];
 
+    //timeline.push(consent, get_id, survey_instructions, decoy_database, money_distribution, about, examples, quizfunc);
+    timeline.push(quiz, incorrect_response_prompt, final_instructions);
+
+    timeline.push(firstInstruc);
     for (let i = 0; i < trialNumber; i++) {
       timeline.push(firstBlock);
     }
 
     timeline.push(randomTrial, firstSelect);
 
+    timeline.push(secondInstruc);
     for (let i = 0; i < trialNumber; i++) {
       timeline.push(secondBlock);
     }
 
     timeline.push(randomTrial, secondSelect)
 
-
+    timeline.push(thirdInstruc);
     for (let i = 0; i < trialNumber; i++) {
       timeline.push(thirdBlock);
     }
