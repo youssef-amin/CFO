@@ -520,8 +520,6 @@
       ]
     }
 
-
-var incorrect;
     //Decision Trial Setup//
     const circles = {
       guar: `    
@@ -664,9 +662,9 @@ var incorrect;
   ]
   }
 
-  function quizfunc() {
-   var quiz ={
-     type: jsPsychHtmlKeyboardResponse,
+ let incorrect;
+ var quiz = {
+    type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
       return `</div>
       <h1> Quick Quiz to Ensure Understanding </h1><br></br><p> You decide to accept the gamble. Which key do you press?</p>
@@ -709,29 +707,25 @@ var incorrect;
           }
           data.response = result;
           
-          var incorrect = (data.response == 'gamble') ? 0 : 1;
+          incorrect = (data.response == 'gamble') ? 0 : 1;
           console.log(incorrect)
-
-      
-      }
+        }
     }
-    var resultquiz = {
+      var incorrect_response_prompt = {
         type: jsPsychHtmlKeyboardResponse,
         stimulus: function () {
+          if (incorrect == 0){
           return `<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 24px;">` +
             `You took the guaranteed amount $0.00, this is not correct</div>`
-        },
+        }
+      else {
+        return `<div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 24px;">` +
+            `You have answered correctly and completed the quiz. You will now be directed to the final instructions. </div>`
+      }},
         choices: '',
-        trial_duration: 2000
+        trial_duration: 3000
       }
-
-      console.log(incorrect)
-      return {timeline: [quiz, resultquiz]}
-    
-  }
-
-
-
+      
     function createSELFtrials() {
       var decisionTrial = {
         type: jsPsychHtmlKeyboardResponse,
@@ -1063,7 +1057,7 @@ var incorrect;
     var thirdSelect = selectedTrials[blockRandomizationIndex[2]];
 
     //timeline.push(consent, get_id, survey_instructions, decoy_database, money_distribution, about, examples, quizfunc);
-    timeline.push(quizfunc())
+    timeline.push(quiz, incorrect_response_prompt);
 
     for (let i = 0; i < trialNumber; i++) {
       timeline.push(firstBlock);
