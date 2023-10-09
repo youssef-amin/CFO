@@ -55,14 +55,93 @@
     <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-slider-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-iat-image@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-iat-html@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-free-sort@1.0.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey@0.2.1"></script>
     <!--This loads in the plugin that preloads your images for your participant-->
     <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
     <style>
-      #jspsych-content {
-        max-width: 800px;
+      
+      #jspsych-content{
+        max-width: 900px;
         margin: 0 auto;
+
       }
+
+      .pro_id{
+        padding-top:200px;
+      }
+
+      .survey_instr{
+        padding-top: 200px
+      }
+
+      .decoy_prompt{
+        padding-top: 35px;
+        margin-bottom: 0;
+      }
+
+      .loading_fakes{
+        padding-top: 200px;
+        padding-bottom: 20px;
+      }
+
+      .money_distr{
+        padding-top: 40px;
+      }
+
+      .about{
+        padding-top: 200px;
+      }
+
+      .payment_title{
+        padding-top: 50px;
+      }
+
+      .about_desc{
+        padding-top: 80px;
+      }
+
+      .explanation{
+        padding-top: 70px;
+      }
+
+      .explanation ul{
+        list-style-position: inside;
+        padding: 0;
+      }
+      .explanation li{
+        margin: 0;
+      }
+
+      .summary{
+        padding-top: 90px;
+      }
+
+      .summary ul{
+        list-style-position: inside;
+        padding: 0;
+      }
+
+      .summary li {
+        margin: 0;
+      }
+
+      .certain_example{
+        padding-top: 110px;
+      }
+
+      .quiz{
+        padding-top: 50px;
+      }
+
+      .final_instr{
+        padding-top: 80px;
+      }
+
     </style>
   </head>
 
@@ -73,10 +152,9 @@
     //if reverse_code = 0, e key press is guarantee
     //shuffle function to use on values
 
-
     var jsPsych = initJsPsych({
       on_finish: function () {
-        jsPsych.data.displayData();
+        window.location.href = 'iat.html';
       }
     });
 
@@ -184,10 +262,11 @@
       'img/White_Targets/CFD-WM-249-239-N.jpg']
     var whiteFace = white_face_array[Math.ceil(Math.random() * white_face_array.length)]
 
-    var black_face_array = ['img/Black_Targets/CFD-BM-005-003-N.jpg',
+    var black_face_array = [
+      'img/Black_Targets/CFD-BM-005-003-N.jpg',
       'img/Black_Targets/CFD-BM-021-021-N.jpg',
       'img/Black_Targets/CFD-BM-025-035-N.jpg',
-      'img/Black_Targets/CFD-BM-029-024-N.jpg ',
+      'img/Black_Targets/CFD-BM-029-024-N.jpg',
       'img/Black_Targets/CFD-BM-033-003-N.jpg',
       'img/Black_Targets/CFD-BM-034-031-N.jpg',
       'img/Black_Targets/CFD-BM-039-029-N.jpg',
@@ -204,7 +283,6 @@
       'img/Black_Targets/CFD-BM-241-235-N.jpg',
       'img/Black_Targets/CFD-BM-251-013-N.jpg']
     var blackFace = black_face_array[Math.ceil(Math.random() * black_face_array.length)]
-
 
     var black_array = [
       '<img src = "img/Black_Targets/CFD-BM-005-003-N.jpg" style = "width: 250px; height: 250px;">',
@@ -249,26 +327,128 @@
       '<img src = "img/White_Targets/CFD-WM-249-239-N.jpg" style = "width: 250px; height: 250px;">',
     ]
     var fake_face_array = [
-      '<img src = "img/Null_Lures/CFD-AF-216-106-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-AF-222-134-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-AM-234-355-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-BF-207-004-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-BM-218-132-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-BM-249-235-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/CFD-LF-202-065-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image.png"            style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image_2.png"          style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image_3.png"          style = "width: 200px; height: 200px;">',
-      '<img src = "img/Null_Lures/image_4.png"          style = "width: 200px; height: 200px;">',
-      '<img src = "img/White_Targets/CFD-WM-003-002-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/White_Targets/CFD-WM-004-010-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/White_Targets/CFD-WM-016-001-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/White_Targets/CFD-WM-017-002-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/White_Targets/CFD-WM-020-001-N.jpg" style = "width: 200px; height: 200px;">',
-      '<img src = "img/White_Targets/CFD-WM-026-001-N.jpg" style = "width: 200px; height: 200px;">',
+      '<img src = "img/Null_Lures/CFD-AF-216-106-N.jpg" style = "width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/CFD-AF-222-134-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/CFD-AM-234-355-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/CFD-BF-207-004-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/CFD-BM-218-132-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/CFD-BM-249-235-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/CFD-LF-202-065-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/image.png" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/image_2.png" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/image_3.png" style="width: 150px; height: 150px;">',
+      '<img src="img/Null_Lures/image_4.png" style="width: 150px; height: 150px;">',
+      '<img src="img/White_Targets/CFD-WM-003-002-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/White_Targets/CFD-WM-004-010-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/White_Targets/CFD-WM-016-001-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/White_Targets/CFD-WM-017-002-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/White_Targets/CFD-WM-020-001-N.jpg" style="width: 150px; height: 150px;">',
+      '<img src="img/White_Targets/CFD-WM-026-001-N.jpg" style="width: 150px; height: 150px;">'
+
     ]
     var randomized_fakes = jsPsych.randomization.repeat(fake_face_array, 1)
-    console.log(randomized_fakes)
+    var iat_imgs = [
+      {face:'img/IAT_img/B0jpg.jpg'},
+      {face:'img/IAT_img/B1jpg.jpg'},
+      {face:'img/IAT_img/B2jpg.jpg'},
+      {face:'img/IAT_img/B3jpg.jpg'},
+      {face:'img/IAT_img/B4jpg.jpg'},
+      {face:'img/IAT_img/B5jpg.jpg'},
+      {face:'img/IAT_img/B6jpg.jpg'},
+      {face:'img/IAT_img/B7jpg.jpg'},
+      {face:'img/IAT_img/B8jpg.jpg'},
+      {face:'img/IAT_img/B9jpg.jpg'},
+      {face:'img/IAT_img/W0jpg.jpg'},
+      {face:'img/IAT_img/W1jpg.jpg'},
+      {face:'img/IAT_img/W2jpg.jpg'},
+      {face:'img/IAT_img/W3jpg.jpg'},
+      {face:'img/IAT_img/W4jpg.jpg'},
+      {face:'img/IAT_img/W5jpg.jpg'},
+      {face:'img/IAT_img/W6jpg.jpg'},
+      {face:'img/IAT_img/W7jpg.jpg'},
+      {face:'img/IAT_img/W8jpg.jpg'},
+      {face:'img/IAT_img/W9jpg.jpg'}
+      ]
+
+      var iat_word = [
+      {combined: 'Fabulous'},
+      {combined: 'Awful'},
+      {combined: 'Fantastic'},
+      {combined: 'Disgusting'},
+      {combined: 'Great'},
+      {combined: 'Lovely'},
+      {combined: 'Foul'},
+      {combined: 'Horrible'},
+      {combined: 'Horrid'},
+      {combined: 'Nice'},
+      {combined: 'Terrific'},
+      {combined: 'Nasty'},
+      {combined: 'Superb'},
+      {combined: 'Revolting'},
+      {combined: 'Wonderful'},
+      {combined: 'Terrible'}
+      ]
+      
+      var combined_array = [
+      {combined: '<img src = img/IAT_img/B0jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B1jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B2jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B3jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B4jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B5jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B6jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B7jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B8jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/B9jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W0jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W1jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W2jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W3jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W4jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W5jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W6jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W7jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W8jpg.jpg>'},
+      {combined: '<img src = img/IAT_img/W9jpg.jpg>'},
+      {combined: 'Fabulous'},
+      {combined: 'Awful'},
+      {combined: 'Fantastic'},
+      {combined: 'Disgusting'},
+      {combined: 'Great'},
+      {combined: 'Lovely'},
+      {combined: 'Foul'},
+      {combined: 'Horrible'},
+      {combined: 'Horrid'},
+      {combined: 'Nice'},
+      {combined: 'Terrific'},
+      {combined: 'Nasty'},
+      {combined: 'Superb'},
+      {combined: 'Revolting'},
+      {combined: 'Wonderful'},
+      {combined: 'Terrible'}
+    ]
+
+    var good_words = [
+      'Fabulous',
+      'Fantastic',
+      'Great',
+      'Lovely',
+      'Nice',
+      'Terrific',
+      'Superb',
+      'Wonderful',
+    ]
+
+    var bad_words = [
+    'Awful',
+    'Disgusting',
+    'Foul',
+    'Horrible',
+    'Horrid',
+    'Nasty',
+    'Revolting',
+    'Terrible'
+    ]
 
     var prolific_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
     jsPsych.data.addProperties({
@@ -278,8 +458,8 @@
     var consent = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus:
-        //<div style="text-align: left;"><span style="font-size:22px;">
-        `<u><h1>Consent Form</h1></u>
+        `
+        <u><h1>Consent Form</h1></u>
      <br>
      This survey should take about 25 minutes. You will be compensated with a flat rate of $${fee} for participation.
      <br>
@@ -306,7 +486,7 @@
     const get_id = {
       type: jsPsychSurveyText,
       questions: [{ prompt: "Prolific ID:", value: prolific_id }],
-      preamble: ["Please enter your Prolific ID below.<br><br>If you do not enter your ID accurately, we may not be able to pay you the correct amount."],
+      preamble: ["<div class = 'pro_id'><p> Please enter your Prolific ID below.<br><br>If you do not enter your ID accurately, we may not be able to pay you the correct amount.</p></div>"],
       data: {
         task: 'prolific_id'
       },
@@ -323,9 +503,10 @@
       timeline: [
         {
           type: jsPsychHtmlKeyboardResponse,
-          stimulus: '<p> This is a study about monetary decision-making. We want to know how you make decisions for yourself and for others. ' +
+          stimulus: '<p class = survey_instr> This is a study about monetary decision-making. We want to know how you make decisions for yourself and for others. ' +
             'First, continue to read the instructions and see the photos of the other participants you will be making decisions for today. <p>' +
-            '<p> You can press the space bar to progress through the pages in this study. </p>',
+            '<p> You can press the space bar to progress through the pages in this study.' +
+              '</p><p><b> Please press the space bar to advance.</b></p>',
           choices: " "
         },
 
@@ -346,8 +527,8 @@
 
         {
           type: jsPsychHtmlKeyboardResponse,
-          stimulus: `<p> Next you will be deciding for people from our previous group of respondents. 
-      At the end of the study, you will also be given the option to opt-in to send a picture for use in a future decision-making study 
+          stimulus: '<p class = "survey_instr">Next you will be deciding for people from our previous group of respondents.</p>' + 
+      `<p>At the end of the study, you will also be given the option to opt-in to send a picture for use in a future decision-making study 
       where you could potentially receive money based on other's choices. Further elaboration regarding clothing requirements and picture formatting 
       will be given at the end of the study if you choose to opt-in. </p>` +
             '<p><b> Please press the space bar to advance.</b></p>',
@@ -356,32 +537,38 @@
       ]
     };
 
+    var preload = {
+      type: jsPsychPreload,
+      auto_preload: true
+    };
+
     var decoy_database = {
       timeline: [
         {
           type: jsPsychHtmlKeyboardResponse,
           stimulus: function () {
-            return `This is a group of participants that chose to opt-in from our previous group of respondents. 
+            return `<p class = "decoy_prompt">This is a group of participants that chose to opt-in from our previous group of respondents. 
           We will select&nbsp;<strong>two</strong>&nbsp;of them via a random number generator for you to make decisions for, 
-          and you will be managing their endowments on their behalf.<br>` +
+          and you will be managing their endowments on their behalf.</p><p><b> Please press the space bar to advance.</b></p>` +
+          
               '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
               '<tbody><tr><td style="text-align: center;">' + randomized_fakes[0] + '</td>' +
-              `<td style="text-align: center;"><img src = ${blackFace} style = "width: 200px; height: 200px;"></td>` +
+              `<td style="text-align: center;"><img src = ${blackFace} style = "width: 150px; height: 150px;"></td>` +
               '<td style="text-align: center;">' + randomized_fakes[1] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[2] + '</td>' +
-              '<td style="text-align: center;">' + randomized_fakes[3] + '</td><br></br>' +
+              '<td style="text-align: center;">' + randomized_fakes[3] + '</td>' +
               '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
               '<tbody><tr><td style="text-align: center;">' + randomized_fakes[16] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[4] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[5] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[6] + '</td>' +
-              `<td style="text-align: center;"><img src = ${whiteFace} style = "width: 200px; height: 200px;"></td><br></br>` +
+              `<td style="text-align: center;"><img src = ${whiteFace} style = "width: 150px; height: 150px;"></td>` +
               '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
               '<tbody><tr><td style="text-align: center;">' + randomized_fakes[7] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[8]+ '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[9] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[10] + '</td>' +
-              '<td style="text-align: center;">' + randomized_fakes[11] + '</td><br></br>' +
+              '<td style="text-align: center;">' + randomized_fakes[11] + '</td>' +
               '<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">' +
               '<tbody><tr><td style="text-align: center;">' + randomized_fakes[12] + '</td>' +
               '<td style="text-align: center;">' + randomized_fakes[13] + '</td>' +
@@ -395,30 +582,29 @@
         },
 
         {
-          type: jsPsychImageButtonResponse,
-          stimulus: 'img/Null_Lures/loading_gif.gif',
-          prompt: 'Please wait while we select faces from our database',
+          type: jsPsychHtmlKeyboardResponse,
+          stimulus: `<p class = "loading_fakes">Please wait while we select faces from our database</p>`,
+          prompt: `<img src = "img/spinner.gif">`,
           trial_duration: 5000,
           choices: []
         }
       ]
     }
 
-
     var money_distribution = {
       timeline: [
         {
           type: jsPsychHtmlKeyboardResponse,
           stimulus: function () {
-            return `<table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">
+            return `<div class = "money_distr"><table border="0px" cellpadding="1" cellspacing="1" style="width:100%; margin-left:auto; margin-right:auto">
               <tbody><tr>
               <td style="text-align: center;"><span style="font-size:26px;"><strong> $${fee} </strong></span></td> 
               <td style="text-align: center;"><span style="font-size:26px;"><strong> $${fee} </strong></span></td> 
               <td style="text-align: center;"><span style="font-size:26px;"><strong> $${fee} </strong></span></td></tr> 
               <tr>
               <td style="text-align: center;"><img src= ${selfFace}  style="width: 190px; height: 190px;" /></td> 
-              <td style="text-align: center;"><img src= ${blackFace} style="width: 190px; height: 190px;" /></td> 
-              <td style="text-align: center;"><img src= ${whiteFace} style="width: 190px; height: 190px;" /></td></tr> 
+              <td style="text-align: center;"><img src= ${blackFace} style="width: 220px; height: 190px;" /></td> 
+              <td style="text-align: center;"><img src= ${whiteFace} style="width: 220px; height: 190px;" /></td></tr> 
               <tr>
               <td style="text-align: center;"><span style="font-size:26px;">You</span></td>
               <td style="text-align: center;"><span style="font-size:26px;">${ABkey.black}</span></td>
@@ -426,7 +612,7 @@
               <p>These are now the people you will be making decisions for during the study, including yourself. I am now going to give you <b> $${fee} each</b> for the two others you will be deciding for.</p>
               <p><b>This is now their money!</b> If they do well in the study today based on your decisions, we&rsquo;ll add to that and pay them more (again, potentially double).
               If they do poorly based on your decisions, they will have to give me some of that back, but for all intents and purposes that is now their money.</p><br><br/>
-              <p><b> Please press the space bar to advance.</b></p>`
+              <p><b> Please press the space bar to advance.</b></p></div>`
           },
           choices: " "
         }
@@ -437,7 +623,7 @@
       timeline: [
         {
           type: jsPsychHtmlKeyboardResponse,
-          stimulus: `<p>Today you will make choices between certain amounts of money and gambles - for yourself and for others. 
+          stimulus: `<p class = "about">Today you will make choices between certain amounts of money and gambles - for yourself and for others. 
         The choices you make for yourself will not affect the others' outcomes, 
         nor will the choices you make for the others affect your outcome.</p>
         <p><b> Please press the space bar to advance.</b></p>`,
@@ -447,7 +633,7 @@
         {
           type: jsPsychHtmlKeyboardResponse,
           stimulus: function () {
-            return '<h1> Payment </h1>' +
+            return '<h1 class = "payment_title"> Payment </h1>' +
               `<p>Flat participant fee of $${fee} + upon completion of the task, without exception.
         This amount will not be influenced by your choices and you will be paid this amount upon completion of the experiment 
         regardless of your choices.</p>` +
@@ -465,7 +651,7 @@
         {
           type: jsPsychHtmlKeyboardResponse,
           stimulus: function () {
-            return ` <p> You will make decisions in three separate sessions - one for yourself, and one for each of the two others. 
+            return ` <p class = "about_desc"> You will make decisions in three separate sessions - one for yourself, and one for each of the two others. 
           Each session will consist of 90 trials. In each trial, you will be presented with two options: 
           one a certain amount of money and the other a gamble. </p>` +
               `<p> Take as much time as you need to make your choices. </p>` +
@@ -480,7 +666,7 @@
         {
           type: jsPsychHtmlKeyboardResponse,
           stimulus: function () {
-            return `<p> When the task is complete, we will select 1 trial at random from all of your trials today and pay you the actual value of that randomly selected trial. 
+            return `<p class = "about_desc"> When the task is complete, we will select 1 trial at random from all of your trials today and pay you the actual value of that randomly selected trial. 
         We will also pick one trial at random from all your trials for Person A, and one trial from all your trials for Person B, and pay them the actual value of those 
         randomly selected trials. </p>` +
               `<p><b> You CANNOT CHANGE the choice you made. Since you do not know in advance which trial will count, you should treat every trial as if it is your only trial. </b></p>` +
@@ -491,28 +677,28 @@
         {
           type: jsPsychHtmlKeyboardResponse,
           stimulus: function () {
-            return '<p>The computer program uses a random number generator to pick the trials. Again, this is your own money that you will be winning and losing. For the one trial picked for you: </p>' +
+            return '<div class = "explanation"><p>The computer program uses a random number generator to pick the trials. Again, this is your own money that you will be winning and losing. For the one trial picked for you: </p>' +
               '<ul><li>If you accepted the gamble and won, we will add that money to your ' + base_endowment + '</li>' +
               '<li>If you accepted the gamble and lost, we will take that money from your ' + base_endowment + '</li>' +
               '<li>If you rejected the gamble, we will adjust your ' + base_endowment + ' by the guaranteed alternative</li></ul>' +
               '<p> The program will also select one trial at random for each of the others you made decisions for, and pay those people the actual value of that randomly selected trial.' +
-              'Again, this is their own money that you will be winning and losing for them. For the one trial picked for each of them: </p>' +
+              ' Again, this is their own money that you will be winning and losing for them. For the one trial picked for each of them: </p>' +
               '<ul><li>If you accepted the gamble and won, we will add that money to their ' + base_endowment + '</li>' +
               '<li>If you accepted the gamble and lost, we will take that money from their ' + base_endowment + '</li>' +
               '<li>If you rejected the gamble, we will adjust their ' + base_endowment + ' by the guaranteed alternative</li></ul>' +
-              '<p>Every trial in the experiment has an equal chance of being the one choice that counts toward your payment and the payments to the others. It is important that you understand this. </p>'
+              '<p>Every trial in the experiment has an equal chance of being the one choice that counts toward your payment and the payments to the others. It is important that you understand this. </p></div>'
           },
           choices: " "
         },
         {
           type: jsPsychHtmlKeyboardResponse,
           stimulus: function () {
-            return `<p>Just to summarize, upon completion of the study:</p> <ul><li>You will be paid a flat $${fee}` + ' participation fee + the ' + base_endowment +
+            return `<div class = "summary"> <p>Just to summarize, upon completion of the study:</p> <ul><li>You will be paid a flat $${fee}` + ' participation fee + the ' + base_endowment +
               ` adjusted for your randomly selected trial; The people you made choices for will also be paid a flat $${fee} participation fee + the ` + base_endowment +
               ' adjusted for their randomly selected trial.</li> <li>If your choice in the randomly selected trial was the certain amount, the experimenter will give you ' +
               "the others that amount of money.</li> <li>If your choice was the gamble, you or the others receive the outcome of the gamble (win or loss) as determined by the computer's coin flip.</li></ul>" +
               '<p>You will now see some examples of the trials.</p>' +
-              '<p><b> Please press the space bar to advance.</b></p>'
+              '<p><b> Please press the space bar to advance.</b></p></div>'
 
           },
           choices: " "
@@ -549,12 +735,12 @@
     {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function(){
-      return `</div>
+      return `</div><div class = "certain_example">
     A certain amount looks like this. This option is winning $.30 for sure <br><br>
                 <div style="display: flex; justify-content: space-between;">
                 ${guarOrGamb[0]}
     </div><br></br> 
-    <p><b> Please press the space bar to advance.</b></p>`},
+    <p><b> Please press the space bar to advance.</b></p></div>`},
     choices: " ",
     on_load: function () {
           window.focus();
@@ -570,13 +756,13 @@
   {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
-      return `</div>
+      return `</div><div class = "certain_example">
     These options are getting $0.00 for sure (LEFT), or losing $0.40 for sure (RIGHT) <br><br>
                 <div style="display: flex; justify-content: space-between;">
                 ${guarOrGamb[0]}${secondGuar}
     </div>
     <br></br> 
-    <p><b> Please press the space bar to advance.</b></p>`},
+    <p><b> Please press the space bar to advance.</b></p></div>`},
     choices: " ",
     on_load: function () {
           window.focus();
@@ -593,14 +779,14 @@
   {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
-      return `</div>
+      return `</div><div class = "certain_example">
     A <b> gamble option </b> looks like this. If you choose his gamble, a coin will be flipped: HEADS you win $.90 (top)
     ; TAILS you lose $1.13 (bottom). <br><br>
                 <div style="display: flex; justify-content: space-between;">
                 ${guarOrGamb[1]}
     </div>
     <br></br> 
-    <p><b> Please press the space bar to advance.</b></p>`},
+    <p><b> Please press the space bar to advance.</b></p></div>`},
     choices: " ",
     on_load: function () {
           window.focus();
@@ -617,9 +803,9 @@
   {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
-      return `</div>
+      return `</div><div class = "certain_example">
       This is what a choice looks like. Would you prefer $0.00 <b>for sure</b>, or a <b>gamble</b> with 50-50 chance of winning $.90 or losing $1.13?
-      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br>
+      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br></div>
                 <div style="display: flex; justify-content: space-between;">
                   ${guarOrGamb[0]}${guarOrGamb[1]}
     </div>`},
@@ -640,9 +826,9 @@
   {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
-      return `</div>
+      return `</div><div class = "certain_example">
       Another trial might look like this. Would you prefer winning $.50 <b>for sure</b>, or taking a <b>gamble</b> with 50-50 chance of winning $.50 or receiving $0.00?
-      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br>
+      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br></div>
                 <div style="display: flex; justify-content: space-between;">
                   ${guarOrGamb[0]}${guarOrGamb[1]}
     </div>`},
@@ -666,9 +852,9 @@
  var quiz = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
-      return `</div>
+      return `</div><div class = "quiz">
       <h1> Quick Quiz to Ensure Understanding </h1><br></br><p> You decide to accept the gamble. Which key do you press?</p>
-      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br>
+      <br><br><b>Press "E" on your keyboard for the left option or "I" on your keyboard for the right option</b>. <br><br></div>
                 <div style="display: flex; justify-content: space-between;">
                   ${guarOrGamb[0]}${guarOrGamb[1]}
     </div>`},
@@ -729,7 +915,7 @@
     var final_instructions = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: function(){
-        return `<p> Ok, let's get started. </p> <p>When making decisions in today’s task, please consider each choice on its own merits. 
+        return `<p class = final_instr> Ok, let's get started. </p> <p>When making decisions in today’s task, please consider each choice on its own merits. 
         In other words, concentrate on the values in that one gamble, its possible outcomes, and the guaranteed alternative.</p> 
         <p>When you are making decisions for yourself, ask yourself how you would feel if you won that positive amount, 
         how you would feel if you lost that negative amount, and how you feel about the guaranteed amount.</p>
@@ -1121,7 +1307,14 @@
     var secondInstruc = pretrial_instructions[blockRandomizationIndex[1]];
     var thirdInstruc = pretrial_instructions[blockRandomizationIndex[2]];
 
-    //timeline.push(consent, get_id, survey_instructions, decoy_database, money_distribution, about, examples, quizfunc);
+    var redirect_block = {
+      timeline: thirdSelect,
+      on_finish: function() {
+        jsPsych.data.addProperties({maintaskComplete: true});
+    }
+    };
+
+    timeline.push(preload, consent, get_id, survey_instructions, decoy_database, money_distribution, about, examples);
     timeline.push(quiz, incorrect_response_prompt, final_instructions);
 
     timeline.push(firstInstruc);
@@ -1144,7 +1337,7 @@
     }
 
     timeline.push(randomTrial, thirdSelect)
-
+    
     jsPsych.run(timeline);
 
 

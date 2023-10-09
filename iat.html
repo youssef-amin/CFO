@@ -133,7 +133,7 @@ var iat_instructions = {
   '<p>In the task, words and/or images appear in the middle of the screen. </p>' +
   '<p>When the word/image belongs to the category on the left, press the E key as fast as you can. When it belongs to the category on the right, press the I key as fast as you can. </p>' +
   '<p>If you make an error, a red X will appear. Correct errors by hitting the other key. Please try to go as fast as you can while making as few errors as possible.</p>' +
-  '<p>When you are ready, press [Space] to begin</p>',
+  '<p>When you are ready, press <b>[Space]</b> to begin</p>',
   choices: " "
 };
 
@@ -164,7 +164,7 @@ var instr_1 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:'<p> Now the categories have changed, but the rules remain the same. </p>' +
   '<p> Please try to go as <em> as fast as you can </em> while making as few errors as possible. Correct errors by hitting the other key </p>' +
-  '<p> When you are ready, press [Space] to begin </p>',
+  '<p> When you are ready, press <b>[Space]</b> to begin </p>',
   choices: " "
 }
 
@@ -235,7 +235,7 @@ var instr_2 = {
   stimulus:'<p> Now the four categories you saw separately will appear together. Remember, each word/image fits in only one of the four categories. The label/item colors may help you identify the appropriate category. </p>' +
   '<p> Use the E key for the two categories on the left and the I key for the two categories on the right. </p>' +
   '<p> Again, try to go as fast as possible without making mistakes. Correct errors by hitting the other key. Practice this combination now. </p>' +
-  '<p> When you are ready, press [Space] to begin </p>',
+  '<p> When you are ready, press <b>[Space]</b> to begin </p>',
   choices: " "
 }
 
@@ -483,7 +483,7 @@ var instr_3 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:'<p> The categories will now switch sides. </p>' +
   '<p>Remember to try to go as fast as you can while making as few errors as possible. Correct errors by hitting the other key. </p>' +
-  '<p>When you are ready, please press the [Space] bar to begin. </p>',
+  '<p>When you are ready, please press the <b>[Space]</b> bar to begin. </p>',
   choices: " "
 }
 
@@ -491,7 +491,7 @@ var instr_4 = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus:'<p> Notice the four categories have been combined again, but in a new configuration. </p>' +
   '<p>Remember to try to go as fast as you can while making as few errors as possible. Correct errors by hitting the other key. </p>' +
-  '<p>When you are ready, please press the [Space] bar to begin. </p>',
+  '<p>When you are ready, please press the <b>[Space]</b> bar to begin. </p>',
   choices: " "
 }
 
@@ -524,8 +524,8 @@ active_iat_block = random_array[Math.floor(Math.random() * random_array.length)]
 var finished_study = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function(){
-    return `<p>Thank you! You've finished the main task of the study. There are a few short measures and questionnaires left for you to complete.</p>` +
-    '<p><b> Please press the space bar to continue to the final portion of the study.</b></p>'
+    return `<div class = "survey_prompt"><p>Thank you! You've finished the main task of the study. There are a few short measures and questionnaires left for you to complete.</p>` +
+    '<p><b> Please press the space bar to continue to the final portion of the study.</b></p></div>'
   },
   choices: " "
 }
